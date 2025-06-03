@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import axios from "axios";
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
@@ -52,56 +51,9 @@ const AddProduct = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const submitData = new FormData();
-
-    Object.entries(formData).forEach(([key, value]) => {
-      submitData.append(key, value);
-    });
-
-    images.forEach(({ file, alt }) => {
-      if (file) {
-        submitData.append("images", file);
-        submitData.append("altTexts", alt);
-      }
-    });
-
-    try {
-      await axios.post("http://localhost:5000/api/products", submitData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      alert("Product added successfully!");
-      setFormData({
-        category: "",
-        subcategory: "",
-        brand: "",
-        name: "",
-        color: "",
-        price: "",
-        discount: "",
-        discountPrice: "",
-        warranty: "",
-        coupon: "",
-        specifications: "",
-      });
-      setImages([
-        { file: null, alt: "" },
-        { file: null, alt: "" },
-        { file: null, alt: "" },
-        { file: null, alt: "" },
-        { file: null, alt: "" },
-      ]);
-    } catch (err) {
-      console.error(err);
-      alert("Error adding product");
-    }
-  };
-
   return (
     <div className="add-product-container">
-      <form className="add-product-form" onSubmit={handleSubmit}>
+      <form className="add-product-form">
         <h2>Add New Product</h2>
 
         <label>Category</label>
@@ -262,7 +214,7 @@ const AddProduct = () => {
           ))}
         </div>
 
-        <button type="submit" className="submit-btn">
+        <button type="button" className="submit-btn">
           Add Product
         </button>
       </form>
