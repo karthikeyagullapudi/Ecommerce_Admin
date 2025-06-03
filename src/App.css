@@ -1,0 +1,173 @@
+/* Ensure full height */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main container centers the card */
+.mainlogin {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+}
+
+/* Card styles */
+.firstcard-login {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+
+  /* Soft box shadow */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.firstcard-login:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.firstcard-login h1 {
+  margin-bottom: 24px;
+  font-size: 28px;
+  color: #333;
+}
+
+/* Input container */
+.cardInputs-login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label {
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Input fields */
+.login-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border 0.3s;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+}
+/* Login button style */
+.login-btn {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #4338ca;
+}
+.forgot-password {
+  margin-top: 12px;
+  text-align: right;
+}
+
+.forgot-password a {
+  font-size: 14px;
+  color: #4f46e5;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.forgot-password a:hover {
+  color: #3730a3;
+  text-decoration: underline;
+}
+/* add product card start  */
+.add-product-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  background: #f9f9f9;
+}
+
+.add-product-form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.add-product-form h2 {
+  text-align: center;
+}
+
+.add-product-form input[type="text"],
+.add-product-form input[type="number"],
+.add-product-form input[type="file"],
+.add-product-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.size-checkbox {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.add-product-form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.add-product-form button:hover {
+  background-color: #0056b3;
+}
+
+/* add product css end  */
