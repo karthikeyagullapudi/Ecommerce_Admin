@@ -11,11 +11,17 @@
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #f5f7fb;
   color: #2d3748;
+  line-height: 1.6;
 }
 
 /* Home Layout */
@@ -43,6 +49,11 @@ body {
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.Header-container:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Sidebar Styles */
@@ -54,55 +65,62 @@ body {
   top: 80px;
   transition: var(--transition);
   border-right: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 1.5rem 0;
+  padding: 1rem 0;
+  overflow-y: auto;
 }
 
 .sidebar-list {
   list-style-type: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .sidebar-list li {
-  padding: 0.75rem 2rem;
+  padding: 15px 20px;
   cursor: pointer;
   transition: var(--transition);
-  display: flex;
-  align-items: center;
-  margin: 0.25rem 1rem;
-  border-radius: var(--border-radius);
   color: #4a5568;
   font-weight: 500;
+  border-left: 3px solid transparent;
 }
 
 .sidebar-list li:hover {
-  background-color: #f0f4f8;
+  background-color: rgba(67, 97, 238, 0.05);
   color: var(--primary);
 }
 
 .sidebar-list li:active {
   transform: scale(0.98);
-}
-
-/* Active state */
-.sidebar-list li.active {
-  background-color: #f0f4ff;
+  background-color: rgba(67, 97, 238, 0.1);
   color: var(--primary);
   font-weight: 600;
+  border-left: 3px solid var(--primary);
 }
 
-/* Add icons (you would need to include an icon library) */
-.sidebar-list li::before {
-  content: "";
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin-right: 12px;
-  background-color: currentColor;
-  mask-size: contain;
-  mask-position: center;
-  mask-repeat: no-repeat;
-  opacity: 0.7;
+/* .sidebar-list li.active {
+  background-color: rgba(67, 97, 238, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+  border-left: 3px solid var(--primary);
+} */
+
+/* Scrollbar styling */
+.SideBar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.SideBar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.SideBar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.SideBar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.15);
 }
 
 /* Responsive Design */
@@ -122,13 +140,14 @@ body {
   .SideBar.active {
     transform: translateX(0);
   }
+
+  .sidebar-list li {
+    padding: 0.75rem 1rem;
+  }
 }
 
-/* Add a nice hover effect on header */
-.Header-container {
-  transition: var(--transition);
-}
-
-.Header-container:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+@media (max-width: 768px) {
+  .Header-container {
+    padding: 0 1rem;
+  }
 }
