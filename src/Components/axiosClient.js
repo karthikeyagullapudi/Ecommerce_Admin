@@ -1,5 +1,5 @@
 import axios from "axios";
-import "dotenv/config";
+// import "dotenv/config";
 
 export const axiosClient = axios.create({
   baseURL: "http://localhost:4000",
