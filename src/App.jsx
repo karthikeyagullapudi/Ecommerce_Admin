@@ -7,6 +7,7 @@ import SubCategory from "./Components/SubCategory";
 import Brand from "./Components/Brand";
 import Coupons from "./Components/Coupons";
 import Color from "./Components/ProductColor";
+import AddProductStatic from "./Components/aproduct";
 import "./app.css";
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
           {activePage === "brand" && <Brand />}
           {activePage === "coupons" && <Coupons />}
           {activePage === "colors" && <Color />}
-          {activePage === "product" && <AddProduct />}
+          {activePage === "product" && <AddProductStatic />}
           {activePage === "vendor" && <h2>Vendor Page</h2>}
         </main>
       </div>
