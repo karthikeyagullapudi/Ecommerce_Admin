@@ -23,9 +23,10 @@ export default function AccountMenu() {
   };
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-        <Typography sx={{ minWidth: 100 }}>Profile</Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: 'white', justifyContent: 'space-between', textAlign: 'center', paddingLeft: '30px', paddingRight: '30px', paddingBottom: '10px', paddingTop: '10px' }}>
+        <div>
+          <img style={{ width: '125px' }} src="/src/assets/images/pngwing.com.png" alt="" />
+        </div>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -35,7 +36,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar className='profice-icon' sx={{ width: 45, height: 45, color: '#fff', backgroundColor: '#4661ff' }}>M</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
