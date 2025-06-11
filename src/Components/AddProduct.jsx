@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { axiosClient } from "./axiosClient";
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({

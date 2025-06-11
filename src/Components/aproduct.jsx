@@ -6,7 +6,8 @@ const AddProductStatic = () => {
   const [data, setdata] = useState({});
 
   const handleChange = (event) => {
-    setdata({ ...data, [event.target.name]: event.target.value });
+    if (event.target.name === "")
+      setdata({ ...data, [event.target.name]: event.target.value });
   };
   const handlesubmit = async (event) => {
     console.log("sagar");
