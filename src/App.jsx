@@ -25,7 +25,7 @@ const App = () => {
           {activePage === "brand" && <Brand />}
           {activePage === "coupons" && <Coupons />}
           {activePage === "colors" && <Color />}
-          {activePage === "product" && <AddProduct />}
+          {activePage === "product" && <AddProductStatic />}
           {activePage === "vendor" && <h2>Vendor Page</h2>}
         </main>
       </div>
