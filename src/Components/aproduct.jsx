@@ -1,29 +1,20 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BackEndApi } from "./utils/httpclint";
 
 const AddProductStatic = () => {
-  const [data, setdata] = useState({});
+  const [data, setData] = useState({});
+  const [imagePreview, setImagePreview] = useState("");
 
   const handleChange = (event) => {
-    setdata({ ...data, [event.target.name]: event.target.value });
-  };
-  const handlesubmit = async (event) => {
-    console.log("sagar");
-    event.preventDefault();
-    try {
-      const response = await BackEndApi.post("/api/addproduct", data);
-
-      console.log(response);
-    } catch (error) {
-      alert("fail data submited");
-      console.log(error);
-    }
+    setData({ ...data, [event.target.name]: event.target.value });
   };
 
   const handleBinaryImage = async (event) => {
+    const file = event.target.files[0];
+    setImagePreview(URL.createObjectURL(file));
+
     let formData = new FormData();
-    formData.append("file", event.target.files[0]);
+    formData.append("file", file);
 
     try {
       const response = await BackEndApi.post("/file/upload", formData, {
@@ -31,15 +22,38 @@ const AddProductStatic = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("binary image response===", response);
+      if (response?.status === 201) {
+        const imageUrl = response?.data?.filename;
+        setData({ ...data, [event.target.name]: imageUrl });
+        console.log("file data===", data);
+      }
     } catch (error) {
-      console.log("image upload error===", error);
+      console.log("Image upload error:", error);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("Submitting data:", data);
+
+    if (parseFloat(data.discountPrice) > parseFloat(data.price)) {
+      alert("Discounted price cannot be greater than original price.");
+      return;
+    }
+
+    try {
+      const response = await BackEndApi.post("/product/addproduct", data);
+      console.log("Product submitted:", response);
+      alert("Product added successfully!");
+    } catch (error) {
+      alert("Failed to submit data");
+      console.log("Submit error:", error);
     }
   };
 
   return (
     <div className="add-product-container">
-      <form className="add-product-form" onSubmit={handlesubmit}>
+      <form className="add-product-form" onSubmit={handleSubmit}>
         <h2>Add New Product</h2>
 
         <label>Category</label>
@@ -106,6 +120,7 @@ const AddProductStatic = () => {
               min="0"
               max="100"
               required
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -150,6 +165,13 @@ const AddProductStatic = () => {
           <div className="image-upload-group">
             <label>Image 1</label>
             <input type="file" name="file" onChange={handleBinaryImage} />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                style={{ height: "100px", marginTop: "10px" }}
+              />
+            )}
             <input
               type="text"
               name="altText1"
@@ -158,40 +180,6 @@ const AddProductStatic = () => {
               onChange={handleChange}
             />
           </div>
-          {/* <div className="image-upload-group">
-            <label>Image 2</label>
-            <input
-              type="file"
-              name="image2"
-              accept="image/*"
-              required
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="altText2"
-              placeholder="Alt text for Image 2"
-              required
-              onChange={handleChange}
-            />
-          </div> */}
-          {/* <div className="image-upload-group">
-            <label>Image 3</label>
-            <input
-              type="file"
-              name="image3"
-              accept="image/*"
-              required
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="altText3"
-              placeholder="Alt text for Image 3"
-              required
-              onChange={handleChange}
-            />
-          </div> */}
         </div>
 
         <button type="submit" className="submit-btn">
