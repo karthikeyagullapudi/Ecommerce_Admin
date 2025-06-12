@@ -1,23 +1,46 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BackEndApi } from "./utils/httpclint";
 
 const AddProductStatic = () => {
-  const [data, setdata] = useState({});
+  const [data, setData] = useState({});
+  const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
 
-  const handleChange = (event) => {
-    setdata({ ...data, [event.target.name]: event.target.value });
+  const getCatories = async (category) => {
+    try {
+      const response = await BackEndApi.get(
+        `/subcategory/all-subcategories/${category}`
+      );
+      if (response?.status === 200) {
+        return response?.data;
+      }
+    } catch (error) {
+      console.log("categories error===", error);
+    }
   };
-  const handlesubmit = async (event) => {
-    console.log("sagar");
+
+  const handleChange = async (event) => {
+    if (event.target.name === "category") {
+      console.log("cat block hits");
+      const subCategories = await getCatories(event.target.value);
+      if (subCategories?.status === 200) {
+        console.log("all sub category data is====", subCategories);
+        setSubCategory(subCategories?.data);
+        setSubCategory(subCategories?.data);
+      }
+    }
+    setData({ ...data, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("Submitting data:", data);
     try {
       const response = await BackEndApi.post("/api/addproduct", data);
-
-      console.log(response);
+      console.log("Product added successfully:", response);
     } catch (error) {
-      alert("fail data submited");
-      console.log(error);
+      alert("Failed to submit data");
+      console.error("Submit error:", error);
     }
   };
 
@@ -31,35 +54,62 @@ const AddProductStatic = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("binary image response===", response);
+
+      console.log("Image upload response:", response);
+
+      setData({
+        ...data,
+        image1: {
+          url: response.data.url,
+          alt: data.altText1 || "",
+        },
+      });
     } catch (error) {
-      console.log("image upload error===", error);
+      console.error("Image upload error:", error);
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const response = await BackEndApi.get("/category/all-categories");
+      setCategory(response.data.data);
+      console.log("Categories fetched:", response.data.data);
+    } catch (error) {
+      console.error("Couldn't fetch categories:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   return (
     <div className="add-product-container">
-      <form className="add-product-form" onSubmit={handlesubmit}>
+      <form className="add-product-form" onSubmit={handleSubmit}>
         <h2>Add New Product</h2>
 
         <label>Category</label>
-        <select name="category" required onChange={handleChange}>
+        <select name="category" onChange={handleChange} required>
           <option value="">Select Category</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Books">Books</option>
+          {category.map((cat) => (
+            <option key={cat._id} value={cat.category}>
+              {cat.category}
+            </option>
+          ))}
         </select>
 
-        <label>Subcategory</label>
-        <select name="subCategory" required onChange={handleChange}>
-          <option value="">Select Subcategory</option>
-          <option value="T-Shirts">T-Shirts</option>
-          <option value="Laptops">Laptops</option>
-          <option value="Novels">Novels</option>
+        <label>Sub-Category</label>
+        <select name="subCategory" onChange={handleChange} required>
+          <option value="">Select Sub-Category</option>
+          {subCategory.map((sub) => (
+            <option key={sub._id} value={sub.subCategory}>
+              {sub.subCategory}
+            </option>
+          ))}
         </select>
 
         <label>Brand</label>
-        <select name="brand" required onChange={handleChange}>
+        <select name="brand" onChange={handleChange} required>
           <option value="">Select Brand</option>
           <option value="Brand A">Brand A</option>
           <option value="Brand B">Brand B</option>
@@ -71,12 +121,12 @@ const AddProductStatic = () => {
           type="text"
           name="productName"
           placeholder="Enter product name"
-          required
           onChange={handleChange}
+          required
         />
 
         <label>Color</label>
-        <select name="colors" required onChange={handleChange}>
+        <select name="colors" onChange={handleChange} required>
           <option value="">Select Color</option>
           <option value="Red">Red</option>
           <option value="Blue">Blue</option>
@@ -93,8 +143,8 @@ const AddProductStatic = () => {
               name="price"
               placeholder="0.00"
               min="0"
-              required
               onChange={handleChange}
+              required
             />
           </div>
           <div style={{ flex: 1 }}>
@@ -105,6 +155,7 @@ const AddProductStatic = () => {
               placeholder="0"
               min="0"
               max="100"
+              onChange={handleChange}
               required
             />
           </div>
@@ -116,8 +167,8 @@ const AddProductStatic = () => {
           name="discountPrice"
           placeholder="0.00"
           min="0"
-          required
           onChange={handleChange}
+          required
         />
 
         <label>Warranty</label>
@@ -125,12 +176,12 @@ const AddProductStatic = () => {
           type="text"
           name="warranty"
           placeholder="e.g. 1 year"
-          required
           onChange={handleChange}
+          required
         />
 
         <label>Coupon</label>
-        <select name="coupon" required onChange={handleChange}>
+        <select name="coupon" onChange={handleChange} required>
           <option value="">Select Coupon</option>
           <option value="SAVE10">SAVE10 - 10% Off</option>
           <option value="FREESHIP">FREESHIP - Free Shipping</option>
@@ -142,8 +193,8 @@ const AddProductStatic = () => {
           name="specifications"
           placeholder="Enter product specifications"
           className="specifications-textarea"
-          required
           onChange={handleChange}
+          required
         />
 
         <div className="images-group">
@@ -154,44 +205,10 @@ const AddProductStatic = () => {
               type="text"
               name="altText1"
               placeholder="Alt text for Image 1"
-              required
               onChange={handleChange}
+              required
             />
           </div>
-          {/* <div className="image-upload-group">
-            <label>Image 2</label>
-            <input
-              type="file"
-              name="image2"
-              accept="image/*"
-              required
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="altText2"
-              placeholder="Alt text for Image 2"
-              required
-              onChange={handleChange}
-            />
-          </div> */}
-          {/* <div className="image-upload-group">
-            <label>Image 3</label>
-            <input
-              type="file"
-              name="image3"
-              accept="image/*"
-              required
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="altText3"
-              placeholder="Alt text for Image 3"
-              required
-              onChange={handleChange}
-            />
-          </div> */}
         </div>
 
         <button type="submit" className="submit-btn">

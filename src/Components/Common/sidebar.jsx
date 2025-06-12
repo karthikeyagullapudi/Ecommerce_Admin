@@ -9,44 +9,48 @@ const Sidebar = ({ onSelect }) => {
 
   return (
     <aside className="app-sidebar">
-      <button className="sidebar-link" onClick={() => onSelect("dashboard")}>
-        Dashboard
-      </button>
+      <ul>
+        <li className="sidebar-link" onClick={() => onSelect("dashboard")}>
+          Dashboard
+        </li>
 
-      <button className="sidebar-button" onClick={toggleMaster}>
-        Master{" "}
-        <span className={`arrow ${isMasterOpen ? "rotate" : ""}`}>&#9654;</span>
-      </button>
+        <li className="sidebar-button" onClick={toggleMaster}>
+          Master{" "}
+          <span className={`arrow ${isMasterOpen ? "rotate" : ""}`}>
+            &#9654;
+          </span>
+        </li>
 
-      {isMasterOpen && (
-        <div className="sidebar-submenu">
-          <button className="submenu-link" onClick={() => onSelect("category")}>
-            Category
-          </button>
-          <button
-            className="submenu-link"
-            onClick={() => onSelect("subcategory")}
-          >
-            Subcategory
-          </button>
-          <button className="submenu-link" onClick={() => onSelect("brand")}>
-            Brand
-          </button>
-          <button className="submenu-link" onClick={() => onSelect("coupons")}>
-            Coupons
-          </button>
-          <button className="submenu-link" onClick={() => onSelect("colors")}>
-            Colors
-          </button>
-        </div>
-      )}
+        {isMasterOpen && (
+          <div className="sidebar-submenu">
+            <li className="submenu-link" onClick={() => onSelect("category")}>
+              Category
+            </li>
+            <li
+              className="submenu-link"
+              onClick={() => onSelect("subcategory")}
+            >
+              Subcategory
+            </li>
+            <li className="submenu-link" onClick={() => onSelect("brand")}>
+              Brand
+            </li>
+            <li className="submenu-link" onClick={() => onSelect("coupons")}>
+              Coupons
+            </li>
+            <li className="submenu-link" onClick={() => onSelect("colors")}>
+              Colors
+            </li>
+          </div>
+        )}
 
-      <button className="sidebar-link" onClick={() => onSelect("product")}>
-        Product
-      </button>
-      <button className="sidebar-link" onClick={() => onSelect("vendor")}>
-        Vendor
-      </button>
+        <li className="sidebar-link" onClick={() => onSelect("product")}>
+          Product
+        </li>
+        <li className="sidebar-link" onClick={() => onSelect("vendor")}>
+          Vendor
+        </li>
+      </ul>
     </aside>
   );
 };

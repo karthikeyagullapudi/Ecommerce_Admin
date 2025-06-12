@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { BackEndApi } from "./utils/httpclint";
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
@@ -24,10 +24,24 @@ const AddProduct = () => {
     { file: null, alt: "" },
   ]);
 
-  const categories = ["Clothing", "Electronics", "Books"];
+  const [category, setCategory] = useState([]);
   const subcategories = ["T-Shirts", "Laptops", "Novels"];
   const brands = ["Brand A", "Brand B", "Brand C"];
   const colors = ["Red", "Blue", "Green", "Black", "White"];
+
+  useEffect(() => {
+    const handleCategory = async () => {
+      try {
+        const response = BackEndApi.get("/category/all-categories");
+        setCategory(response);
+        console.log(response);
+      } catch (error) {
+        console.log("Coudnt fetch category ====>", error);
+      }
+    };
+
+    handleCategory();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,7 +79,7 @@ const AddProduct = () => {
           required
         >
           <option value="">Select Category</option>
-          {categories.map((cat) => (
+          {category.map((cat) => (
             <option key={cat} value={cat}>
               {cat}
             </option>
