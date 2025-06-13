@@ -514,3 +514,33 @@ body,
     font-size: 20px !important;
     font-weight: 500;
 }
+
+.category-table-heading {
+    font-size: 20px;
+}
+
+.category-serial-no {
+    font-size: 15px;
+    font-weight: 400px;
+}
+
+.category-names {
+    font-weight: 400;
+    font-size: 17px;
+}
+.category-sub-names {
+    font-weight: 400;
+    font-size: 17px;
+}
+.category-brand-names {
+    font-weight: 400;
+    font-size: 17px;
+}
+.category-coupon-names {
+    font-weight: 400;
+    font-size: 17px;
+}
+.category-color-names {
+    font-weight: 400;
+    font-size: 17px;
+}
