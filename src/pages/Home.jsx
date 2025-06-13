@@ -3,8 +3,8 @@ import Sidebar from "../Components/Common/sidebar.jsx";
 const Home = () => {
   return (
     <>
-      <AccountMenu />
-      <Sidebar />
+      {/* <AccountMenu /> */}
+      {/* <Sidebar /> */}
     </>
   );
 };

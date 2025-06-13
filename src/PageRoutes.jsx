@@ -7,7 +7,8 @@ const PageRoutes = () => {
   const SubCategory = lazy(() => import("./Components/SubCategory.jsx"));
   const Brand = lazy(() => import("./Components/Brand.jsx"));
   const Coupons = lazy(() => import("./Components/Coupons.jsx"));
-  const AddProductStatic = lazy(() => import("./Components/AddProduct.jsx"));
+  const ProductColor = lazy(() => import("./Components/ProductColor.jsx"));
+  const AddProductStatic = lazy(() => import("./Components/aproduct.jsx"));
 
   return (
     <>
@@ -18,6 +19,7 @@ const PageRoutes = () => {
           <Route path="/subCategory" element={<SubCategory />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/coupons" element={<Coupons />} />
+          <Route path="/color" element={<ProductColor />} />
           <Route path="/addProductStatic" element={<AddProductStatic />} />
         </Routes>
       </Suspense>

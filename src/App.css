@@ -525,3 +525,44 @@ body,
   display: flex;
   background-color: rgba(159, 159, 255, 0.299);
 }
+.homeDiv {
+  display: flex;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 30px;
+}
+
+.category-table-heading {
+  font-size: 20px;
+}
+
+.category-serial-no {
+  font-size: 15px;
+  font-weight: 400px;
+}
+
+.category-names {
+  font-weight: 400;
+  font-size: 17px;
+}
+.category-sub-names {
+  font-weight: 400;
+  font-size: 17px;
+}
+.category-brand-names {
+  font-weight: 400;
+  font-size: 17px;
+}
+.category-coupon-names {
+  font-weight: 400;
+  font-size: 17px;
+}
+.category-color-names {
+  font-weight: 400;
+  font-size: 17px;
+}
