@@ -2,6 +2,23 @@ import React from "react";
 import BrandCategoryTable from "../Components/BrandTable.jsx"
 
 const Brand = () => {
+  //  const [formData, setFormData] = useState({});
+
+  // const HandleChange = (event) => {
+  //   setFormData({ ...formData, [event.target.name]: event.target.value });
+  // };
+
+  const HandleClick = async (event) => {
+    event.preventDefault();
+    try {
+      // const Response = await BackEndApi.post("/add-brand",formData)
+      console.log(Response)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  };
+
   return (
     <div>
       <div>
