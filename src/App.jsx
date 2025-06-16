@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Header from "./Components/Common/Header";
 import Sidebar from "./Components/Common/sidebar";
 import CategoryCard from "./Components/CategoryCard";
-import AddProduct from "./Components/AddProduct";
 import SubCategory from "./Components/SubCategory";
 import Brand from "./Components/Brand";
 import Coupons from "./Components/Coupons";
