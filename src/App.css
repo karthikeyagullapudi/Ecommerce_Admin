@@ -606,3 +606,76 @@ body,
   background-color: white;
   border-radius: 10px;
 }
+
+/* dashboard */
+
+.dashboard_main_card {
+  display: flex;
+  margin: 0px;
+  padding: 50px;
+}
+.dashboard_sec_card {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  gap: 30px;
+}
+.detailscard {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 333px;
+  border-radius: 4px;
+  background-color: white;
+  height: 110px;
+  box-shadow: 5px 5px 10px lightgray;
+}
+.d-icon-color {
+  color: blue;
+  font-size: 40px;
+}
+
+.d-icon-container {
+  background-color: #8c8ce099 !important;
+  padding: 10px 10px;
+  width: 73px;
+  height: 76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.v-icon {
+  color: #ffce26;
+  font-size: 40px;
+}
+.v-icon-container {
+  padding: 10px 10px;
+  background-color: #fff2c6;
+  width: 73px;
+  height: 76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.rupe-icon-container {
+  padding: 10px 10px;
+  background-color: #ffe0d3;
+  width: 73px;
+  height: 76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.rupe-icon {
+  color: #fd7238;
+  font-size: 40px;
+}
+.d_main_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
