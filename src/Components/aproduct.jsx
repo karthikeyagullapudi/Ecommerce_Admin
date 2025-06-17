@@ -21,7 +21,6 @@ const AddProductStatic = () => {
 
   const handleChange = async (event) => {
     if (event.target.name === "category") {
-      console.log("cat block hits");
       const subCategories = await getCatories(event.target.value);
       if (subCategories?.status === 200) {
         console.log("all sub category data is====", subCategories);
