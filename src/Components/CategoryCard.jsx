@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CategoryTable from "../Components/CategoryTable";
+import { BackEndApi } from "./utils/httpclint";
 
 const CategoryCard = () => {
   const [category, setCategory] = useState("");
@@ -11,10 +12,19 @@ const CategoryCard = () => {
       alert("Please enter a category name.");
       return;
     }
+    addCategory();
+  };
 
-    alert(`Category added: ${category}`);
-    // You can call your API here
-    setCategory("");
+  const addCategory = async () => {
+    try {
+      const response = await BackEndApi.post("/category/add-category", {
+        category,
+      });
+      console.log("Category added ====", response);
+      setCategory("");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
