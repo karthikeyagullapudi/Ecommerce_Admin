@@ -11,10 +11,9 @@ const Sidebar = ({ onSelect }) => {
   return (
     <aside className="app-sidebar">
       <ul>
-        <li className="sidebar-link">
-          {" "}
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
+        <Link to="/dashboard">
+          <li className="sidebar-link"> Dashboard</li>
+        </Link>
 
         <li className="sidebar-button" onClick={toggleMaster}>
           Master{" "}
@@ -42,10 +41,9 @@ const Sidebar = ({ onSelect }) => {
             </Link>
           </div>
         )}
-
-        <li className="sidebar-link">
-          <Link to="/addProductStatic">Product</Link>
-        </li>
+        <Link to="/addProductStatic">
+          <li className="sidebar-link">Product</li>
+        </Link>
         <li className="sidebar-link" onClick={() => onSelect("vendor")}>
           Vendor
         </li>
