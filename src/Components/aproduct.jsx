@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BackEndApi } from "./utils/httpclint";
 
 const AddProductStatic = () => {
@@ -11,6 +11,8 @@ const AddProductStatic = () => {
 
   const handleBinaryImage = async (event) => {
     const file = event.target.files[0];
+    const fieldName = event.target.name;
+
     setImagePreview(URL.createObjectURL(file));
 
     let formData = new FormData();
@@ -22,19 +24,29 @@ const AddProductStatic = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+
       if (response?.status === 201) {
-        const imageUrl = response?.data?.filename;
-        setData({ ...data, [event.target.name]: imageUrl });
-        console.log("file data===", data);
+        const imageUrl = response?.data?.path;
+        setData((prev) => ({ ...prev, [fieldName]: imageUrl }));
+        console.log("Image uploaded successfully:", imageUrl);
       }
     } catch (error) {
       console.log("Image upload error:", error);
     }
   };
 
+  // Auto calculate discount price
+  useEffect(() => {
+    if (data.price && data.discount) {
+      const price = parseFloat(data.price);
+      const discount = parseFloat(data.discount);
+      const discountPrice = price - (price * discount) / 100;
+      setData((prev) => ({ ...prev, discountPrice: discountPrice.toFixed(2) }));
+    }
+  }, [data.price, data.discount]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Submitting data:", data);
 
     if (parseFloat(data.discountPrice) > parseFloat(data.price)) {
       alert("Discounted price cannot be greater than original price.");
@@ -45,6 +57,9 @@ const AddProductStatic = () => {
       const response = await BackEndApi.post("/product/addproduct", data);
       console.log("Product submitted:", response);
       alert("Product added successfully!");
+      setData({});
+      setImagePreview("");
+      event.target.reset();
     } catch (error) {
       alert("Failed to submit data");
       console.log("Submit error:", error);
@@ -129,20 +144,18 @@ const AddProductStatic = () => {
         <input
           type="number"
           name="discountPrice"
-          placeholder="0.00"
-          min="0"
-          required
-          onChange={handleChange}
+          value={data.discountPrice || ""}
+          readOnly
+          placeholder="Auto calculated"
         />
 
         <label>Warranty</label>
-        <input
-          type="text"
-          name="warranty"
-          placeholder="e.g. 1 year"
-          required
-          onChange={handleChange}
-        />
+        <select name="warranty" required onChange={handleChange}>
+          <option value="">Select Warranty</option>
+          <option value="1 Year">1 Year</option>
+          <option value="2 Years">2 Years</option>
+          <option value="3 Years">3 Years</option>
+        </select>
 
         <label>Coupon</label>
         <select name="coupon" required onChange={handleChange}>
@@ -164,7 +177,7 @@ const AddProductStatic = () => {
         <div className="images-group">
           <div className="image-upload-group">
             <label>Image 1</label>
-            <input type="file" name="file" onChange={handleBinaryImage} />
+            <input type="file" name="image1" onChange={handleBinaryImage} />
             {imagePreview && (
               <img
                 src={imagePreview}
