@@ -11,7 +11,10 @@ const Sidebar = ({ onSelect }) => {
   return (
     <aside className="app-sidebar">
       <ul>
-        <li className="sidebar-link"> <Link to="/dashboard">Dashboard</Link></li>
+        <li className="sidebar-link">
+          {" "}
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
 
         <li className="sidebar-button" onClick={toggleMaster}>
           Master{" "}
@@ -22,21 +25,21 @@ const Sidebar = ({ onSelect }) => {
 
         {isMasterOpen && (
           <div className="sidebar-submenu">
-            <li className="submenu-link">
-              <Link to="/categoryCard">Category</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/subCategory">Subcategory</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/brand">Brand</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/coupons">Coupons</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/color">Colors</Link>
-            </li>
+            <Link to="/categoryCard">
+              <li className="submenu-link">Category</li>
+            </Link>
+            <Link to="/subCategory">
+              <li className="submenu-link">Subcategory</li>
+            </Link>
+            <Link to="/brand">
+              <li className="submenu-link">Brand</li>
+            </Link>
+            <Link to="/coupons">
+              <li className="submenu-link">Coupons</li>
+            </Link>
+            <Link to="/color">
+              <li className="submenu-link">Colors</li>
+            </Link>
           </div>
         )}
 
