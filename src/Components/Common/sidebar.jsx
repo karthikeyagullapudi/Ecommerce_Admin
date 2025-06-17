@@ -11,7 +11,7 @@ const Sidebar = ({ onSelect }) => {
   return (
     <aside className="app-sidebar">
       <ul>
-        <li className="sidebar-link">Dashboard</li>
+        <li className="sidebar-link"> <Link to="/dashboard">Dashboard</Link></li>
 
         <li className="sidebar-button" onClick={toggleMaster}>
           Master{" "}
