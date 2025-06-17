@@ -3,10 +3,10 @@ import { BackEndApi } from "./utils/httpclint";
 
 const AddProductStatic = () => {
   const [data, setData] = useState({});
-  const [category, setCategory] = useState([]);
+  const [imagePreview, setImagePreview] = useState("");
   const [subCategory, setSubCategory] = useState([]);
 
-  const getCatories = async (category) => {
+  const getCategories = async (category) => {
     try {
       const response = await BackEndApi.get(
         `/subcategory/all-subcategories/${category}`
@@ -20,67 +20,78 @@ const AddProductStatic = () => {
   };
 
   const handleChange = async (event) => {
-    if (event.target.name === "category") {
-      const subCategories = await getCatories(event.target.value);
-      if (subCategories?.status === 200) {
-        console.log("all sub category data is====", subCategories);
-        setSubCategory(subCategories?.data);
-        setSubCategory(subCategories?.data);
+    const { name, value } = event.target;
+
+    if (name === "category") {
+      const result = await getCategories(value);
+      if (result) {
+        setSubCategory(result.data || []);
       }
     }
-    setData({ ...data, [event.target.name]: event.target.value });
-  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log("Submitting data:", data);
-    try {
-      const response = await BackEndApi.post("/api/addproduct", data);
-      console.log("Product added successfully:", response);
-    } catch (error) {
-      alert("Failed to submit data");
-      console.error("Submit error:", error);
-    }
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleBinaryImage = async (event) => {
-    let formData = new FormData();
-    formData.append("file", event.target.files[0]);
+    const file = event.target.files[0];
+    const fieldName = event.target.name;
 
-    try {
-      const response = await BackEndApi.post("/file/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
 
-      console.log("Image upload response:", response);
+      let formData = new FormData();
+      formData.append("file", file);
 
-      setData({
-        ...data,
-        image1: {
-          url: response.data.url,
-          alt: data.altText1 || "",
-        },
-      });
-    } catch (error) {
-      console.error("Image upload error:", error);
-    }
-  };
+      try {
+        const response = await BackEndApi.post("/file/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
-  const fetchCategories = async () => {
-    try {
-      const response = await BackEndApi.get("/category/all-categories");
-      setCategory(response.data.data);
-      console.log("Categories fetched:", response.data.data);
-    } catch (error) {
-      console.error("Couldn't fetch categories:", error);
+        if (response?.status === 201) {
+          const imageUrl = response?.data?.path;
+          setData((prev) => ({ ...prev, [fieldName]: imageUrl }));
+          console.log("Image uploaded successfully:", imageUrl);
+        }
+      } catch (error) {
+        console.log("Image upload error:", error);
+      }
     }
   };
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    if (data.price && data.discount) {
+      const price = parseFloat(data.price);
+      const discount = parseFloat(data.discount);
+      const discountPrice = price - (price * discount) / 100;
+      setData((prev) => ({ ...prev, discountPrice: discountPrice.toFixed(2) }));
+    }
+  }, [data.price, data.discount]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (parseFloat(data.discountPrice) > parseFloat(data.price)) {
+      alert("Discounted price cannot be greater than original price.");
+      return;
+    }
+
+    try {
+      const response = await BackEndApi.post("/product/addproduct", data);
+      console.log("Product submitted:", response);
+      alert("Product added successfully!");
+      setData({});
+      setImagePreview("");
+      event.target.reset();
+    } catch (error) {
+      alert("Failed to submit data");
+      console.log("Submit error:", error);
+    }
+  };
 
   return (
     <div className="add-product-container">
@@ -88,27 +99,26 @@ const AddProductStatic = () => {
         <h2>Add New Product</h2>
 
         <label>Category</label>
-        <select name="category" onChange={handleChange} required>
+        <select name="category" required onChange={handleChange}>
           <option value="">Select Category</option>
-          {category.map((cat) => (
-            <option key={cat._id} value={cat.category}>
-              {cat.category}
-            </option>
-          ))}
+          <option value="Clothing">Clothing</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Books">Books</option>
         </select>
 
-        <label>Sub-Category</label>
-        <select name="subCategory" onChange={handleChange} required>
-          <option value="">Select Sub-Category</option>
-          {subCategory.map((sub) => (
-            <option key={sub._id} value={sub.subCategory}>
-              {sub.subCategory}
-            </option>
-          ))}
+        <label>Subcategory</label>
+        <select name="subCategory" required onChange={handleChange}>
+          <option value="">Select Subcategory</option>
+          {subCategory.length > 0 &&
+            subCategory.map((sub, idx) => (
+              <option key={idx} value={sub.name}>
+                {sub.name}
+              </option>
+            ))}
         </select>
 
         <label>Brand</label>
-        <select name="brand" onChange={handleChange} required>
+        <select name="brand" required onChange={handleChange}>
           <option value="">Select Brand</option>
           <option value="Brand A">Brand A</option>
           <option value="Brand B">Brand B</option>
@@ -120,12 +130,12 @@ const AddProductStatic = () => {
           type="text"
           name="productName"
           placeholder="Enter product name"
-          onChange={handleChange}
           required
+          onChange={handleChange}
         />
 
         <label>Color</label>
-        <select name="colors" onChange={handleChange} required>
+        <select name="colors" required onChange={handleChange}>
           <option value="">Select Color</option>
           <option value="Red">Red</option>
           <option value="Blue">Blue</option>
@@ -142,8 +152,8 @@ const AddProductStatic = () => {
               name="price"
               placeholder="0.00"
               min="0"
-              onChange={handleChange}
               required
+              onChange={handleChange}
             />
           </div>
           <div style={{ flex: 1 }}>
@@ -154,8 +164,8 @@ const AddProductStatic = () => {
               placeholder="0"
               min="0"
               max="100"
-              onChange={handleChange}
               required
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -164,23 +174,21 @@ const AddProductStatic = () => {
         <input
           type="number"
           name="discountPrice"
-          placeholder="0.00"
-          min="0"
-          onChange={handleChange}
-          required
+          value={data.discountPrice || ""}
+          readOnly
+          placeholder="Auto calculated"
         />
 
         <label>Warranty</label>
-        <input
-          type="text"
-          name="warranty"
-          placeholder="e.g. 1 year"
-          onChange={handleChange}
-          required
-        />
+        <select name="warranty" required onChange={handleChange}>
+          <option value="">Select Warranty</option>
+          <option value="1 Year">1 Year</option>
+          <option value="2 Years">2 Years</option>
+          <option value="3 Years">3 Years</option>
+        </select>
 
         <label>Coupon</label>
-        <select name="coupon" onChange={handleChange} required>
+        <select name="coupon" required onChange={handleChange}>
           <option value="">Select Coupon</option>
           <option value="SAVE10">SAVE10 - 10% Off</option>
           <option value="FREESHIP">FREESHIP - Free Shipping</option>
@@ -192,20 +200,27 @@ const AddProductStatic = () => {
           name="specifications"
           placeholder="Enter product specifications"
           className="specifications-textarea"
-          onChange={handleChange}
           required
+          onChange={handleChange}
         />
 
         <div className="images-group">
           <div className="image-upload-group">
             <label>Image 1</label>
-            <input type="file" name="file" onChange={handleBinaryImage} />
+            <input type="file" name="image1" onChange={handleBinaryImage} />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                style={{ height: "100px", marginTop: "10px" }}
+              />
+            )}
             <input
               type="text"
               name="altText1"
               placeholder="Alt text for Image 1"
-              onChange={handleChange}
               required
+              onChange={handleChange}
             />
           </div>
         </div>
