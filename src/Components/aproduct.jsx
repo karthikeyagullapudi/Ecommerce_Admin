@@ -4,38 +4,65 @@ import { BackEndApi } from "./utils/httpclint";
 const AddProductStatic = () => {
   const [data, setData] = useState({});
   const [imagePreview, setImagePreview] = useState("");
+  const [subCategory, setSubCategory] = useState([]);
 
-  const handleChange = (event) => {
-    setData({ ...data, [event.target.name]: event.target.value });
+  const getCategories = async (category) => {
+    try {
+      const response = await BackEndApi.get(
+        `/subcategory/all-subcategories/${category}`
+      );
+      if (response?.status === 200) {
+        return response?.data;
+      }
+    } catch (error) {
+      console.log("categories error===", error);
+    }
+  };
+
+  const handleChange = async (event) => {
+    const { name, value } = event.target;
+
+    if (name === "category") {
+      const result = await getCategories(value);
+      if (result) {
+        setSubCategory(result.data || []);
+      }
+    }
+
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleBinaryImage = async (event) => {
     const file = event.target.files[0];
     const fieldName = event.target.name;
 
-    setImagePreview(URL.createObjectURL(file));
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
 
-    let formData = new FormData();
-    formData.append("file", file);
+      let formData = new FormData();
+      formData.append("file", file);
 
-    try {
-      const response = await BackEndApi.post("/file/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      try {
+        const response = await BackEndApi.post("/file/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
-      if (response?.status === 201) {
-        const imageUrl = response?.data?.path;
-        setData((prev) => ({ ...prev, [fieldName]: imageUrl }));
-        console.log("Image uploaded successfully:", imageUrl);
+        if (response?.status === 201) {
+          const imageUrl = response?.data?.path;
+          setData((prev) => ({ ...prev, [fieldName]: imageUrl }));
+          console.log("Image uploaded successfully:", imageUrl);
+        }
+      } catch (error) {
+        console.log("Image upload error:", error);
       }
-    } catch (error) {
-      console.log("Image upload error:", error);
     }
   };
 
-  // Auto calculate discount price
   useEffect(() => {
     if (data.price && data.discount) {
       const price = parseFloat(data.price);
@@ -82,9 +109,12 @@ const AddProductStatic = () => {
         <label>Subcategory</label>
         <select name="subCategory" required onChange={handleChange}>
           <option value="">Select Subcategory</option>
-          <option value="T-Shirts">T-Shirts</option>
-          <option value="Laptops">Laptops</option>
-          <option value="Novels">Novels</option>
+          {subCategory.length > 0 &&
+            subCategory.map((sub, idx) => (
+              <option key={idx} value={sub.name}>
+                {sub.name}
+              </option>
+            ))}
         </select>
 
         <label>Brand</label>

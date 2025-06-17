@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ onSelect }) => {
   const [isMasterOpen, setIsMasterOpen] = useState(false);
@@ -10,9 +11,7 @@ const Sidebar = ({ onSelect }) => {
   return (
     <aside className="app-sidebar">
       <ul>
-        <li className="sidebar-link" onClick={() => onSelect("dashboard")}>
-          Dashboard
-        </li>
+        <li className="sidebar-link"> <Link to="/dashboard">Dashboard</Link></li>
 
         <li className="sidebar-button" onClick={toggleMaster}>
           Master{" "}
@@ -23,29 +22,26 @@ const Sidebar = ({ onSelect }) => {
 
         {isMasterOpen && (
           <div className="sidebar-submenu">
-            <li className="submenu-link" onClick={() => onSelect("category")}>
-              Category
+            <li className="submenu-link">
+              <Link to="/categoryCard">Category</Link>
             </li>
-            <li
-              className="submenu-link"
-              onClick={() => onSelect("subcategory")}
-            >
-              Subcategory
+            <li className="submenu-link">
+              <Link to="/subCategory">Subcategory</Link>
             </li>
-            <li className="submenu-link" onClick={() => onSelect("brand")}>
-              Brand
+            <li className="submenu-link">
+              <Link to="/brand">Brand</Link>
             </li>
-            <li className="submenu-link" onClick={() => onSelect("coupons")}>
-              Coupons
+            <li className="submenu-link">
+              <Link to="/coupons">Coupons</Link>
             </li>
-            <li className="submenu-link" onClick={() => onSelect("colors")}>
-              Colors
+            <li className="submenu-link">
+              <Link to="/color">Colors</Link>
             </li>
           </div>
         )}
 
-        <li className="sidebar-link" onClick={() => onSelect("product")}>
-          Product
+        <li className="sidebar-link">
+          <Link to="/addProductStatic">Product</Link>
         </li>
         <li className="sidebar-link" onClick={() => onSelect("vendor")}>
           Vendor
