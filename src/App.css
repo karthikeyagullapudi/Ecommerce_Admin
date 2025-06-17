@@ -382,7 +382,6 @@ body,
   max-width: 500px;
   margin: 0 auto;
   border-radius: 10px;
-  background-color: white;
   padding: 20px 25px;
 }
 
@@ -577,4 +576,10 @@ body,
 .category-color-names {
   font-weight: 400;
   font-size: 17px;
+}
+
+.category-form-design {
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
 }

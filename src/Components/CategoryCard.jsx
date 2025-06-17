@@ -1,19 +1,26 @@
-import CategoryTable from "../Components/CategoryTable";
 import React, { useState } from "react";
+import CategoryTable from "../Components/CategoryTable";
 
 const CategoryCard = () => {
   const [category, setCategory] = useState("");
 
-  const handleAdd = () => {
-    if (category.trim() === "") return alert("Please enter a category name.");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (category.trim() === "") {
+      alert("Please enter a category name.");
+      return;
+    }
+
     alert(`Category added: ${category}`);
+    // You can call your API here
     setCategory("");
   };
 
   return (
     <div className="layout">
-      <div className="category-container">
-        <h2 className="category-heading">Category</h2>
+      <form onSubmit={handleSubmit} className="category-form-design">
+        <h2 className="category-heading">Add Category</h2>
         <div className="category-card">
           <input
             type="text"
@@ -21,12 +28,14 @@ const CategoryCard = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="category-input"
+            required
           />
-          <button onClick={handleAdd} className="category-add-btn">
+          <button type="submit" className="category-add-btn">
             Add
           </button>
         </div>
-      </div>
+      </form>
+
       <CategoryTable />
     </div>
   );
