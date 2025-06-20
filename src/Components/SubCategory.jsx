@@ -76,7 +76,7 @@ const SubCategory = () => {
       if (response?.status === 201 || response?.status === 200) {
         alert("Subcategory added successfully!");
         setSubCategoryName("");
-        fetchSubCategories(categoryObj._id); // Refresh list
+        fetchSubCategories(categoryObj._id);
       } else {
         alert("Failed to add subcategory.");
       }
