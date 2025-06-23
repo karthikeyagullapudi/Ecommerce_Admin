@@ -5,6 +5,7 @@ const AddProductStatic = () => {
   const [data, setData] = useState({});
   const [imagePreview, setImagePreview] = useState("");
   const [subCategory, setSubCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const getCategories = async (category) => {
     try {
@@ -15,7 +16,7 @@ const AddProductStatic = () => {
         return response?.data;
       }
     } catch (error) {
-      console.log("categories error===", error);
+      console.log("categories error ===", error);
     }
   };
 
@@ -63,12 +64,32 @@ const AddProductStatic = () => {
     }
   };
 
+  const getAllCategory = async () => {
+    try {
+      const response = await BackEndApi.get("/category/all-categories");
+      if (response?.status === 200) {
+        setCategories(response.data.data || []);
+      }
+    } catch (error) {
+      console.log("Not able to fetch categories", error);
+    }
+  };
+
+  useEffect(() => {
+    getAllCategory();
+  }, []);
+
   useEffect(() => {
     if (data.price && data.discount) {
       const price = parseFloat(data.price);
       const discount = parseFloat(data.discount);
-      const discountPrice = price - (price * discount) / 100;
-      setData((prev) => ({ ...prev, discountPrice: discountPrice.toFixed(2) }));
+      if (!isNaN(price) && !isNaN(discount)) {
+        const discountPrice = price - (price * discount) / 100;
+        setData((prev) => ({
+          ...prev,
+          discountPrice: discountPrice.toFixed(2),
+        }));
+      }
     }
   }, [data.price, data.discount]);
 
@@ -102,20 +123,21 @@ const AddProductStatic = () => {
           <label>Category</label>
           <select name="category" required onChange={handleChange}>
             <option value="">Select Category</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Books">Books</option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat.category}>
+                {cat.category}
+              </option>
+            ))}
           </select>
 
           <label>Subcategory</label>
           <select name="subCategory" required onChange={handleChange}>
             <option value="">Select Subcategory</option>
-            {subCategory.length > 0 &&
-              subCategory.map((sub, idx) => (
-                <option key={idx} value={sub.name}>
-                  {sub.name}
-                </option>
-              ))}
+            {subCategory.map((sub, idx) => (
+              <option key={idx} value={sub.name}>
+                {sub.name}
+              </option>
+            ))}
           </select>
 
           <label>Brand</label>

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 const PageRoutes = () => {
+  const LoginPage = lazy(() => import("./Components/LoginPage.jsx"));
   const Home = lazy(() => import("../src/pages/Home.jsx"));
   const CategoryCard = lazy(() => import("./Components/CategoryCard.jsx"));
   const SubCategory = lazy(() => import("./Components/SubCategory.jsx"));
@@ -15,7 +16,7 @@ const PageRoutes = () => {
     <>
       <Suspense>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
           <Route path="/categoryCard" element={<CategoryCard />} />
           <Route path="/subCategory" element={<SubCategory />} />
           <Route path="/brand" element={<Brand />} />
