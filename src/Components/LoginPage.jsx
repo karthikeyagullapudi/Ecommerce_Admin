@@ -39,10 +39,7 @@ const Loginpage = () => {
                 : "Get access to your Orders, Wishlist and Recommendations"}
             </h5>
             <div className="flipkartlogin">
-              <img
-                src="/src/assets/images/admin-removebg-preview.png"
-                alt=""
-              />
+              <img src="/src/assets/images/admin-removebg-preview.png" alt="" />
             </div>
           </div>
           <div className="whiteCard">
@@ -109,4 +106,3 @@ const Loginpage = () => {
   );
 };
 export default Loginpage;
-
