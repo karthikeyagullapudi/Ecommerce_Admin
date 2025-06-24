@@ -110,6 +110,22 @@ const LoginPage = () => {
                     />
                   </div>
                   <div className="form-group">
+                    <label
+                      htmlFor="loginemail"
+                      className={formData.loginemail ? "active" : ""}
+                    >
+                      Conform pass
+                    </label>
+                    <input
+                      type="email"
+                      id="loginemail"
+                      name="loginemail"
+                      required
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-group">
                     <label htmlFor="loginPassword">Password</label>
                     <input
                       type="password"
