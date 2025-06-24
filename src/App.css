@@ -1000,3 +1000,125 @@ footer p a:focus:hover {
     }
 }
 /* login end */
+.CTA button {
+    background-color: #f95959;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    font-size: 15px;
+    border-radius: 5px;
+    margin: 0px 10px;
+}
+.loginCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.fullWhiteCrad {
+    background-color: white;
+    width: 850px;
+    display: flex;
+}
+.blueCard {
+    background-color: rgb(40, 116, 240);
+    width: 330px;
+    height: 529px;
+    padding: 40px 35px;
+    color: white;
+}
+.blueCard h1 {
+    font-size: 27px;
+    padding: 10px 0px 15px;
+}
+.blueCard h5 {
+    font-size: 18px;
+    color: rgb(219, 219, 220);
+}
+.flipkartlogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 390px;
+}
+
+.flipkartlogin img {
+    width: 453px;
+    height: 450px;
+}
+.whiteCard {
+    width: 550px;
+    background-color: white;
+    height: 536px;
+    padding: 50px 35px;
+}
+.email-number input {
+    border: none;
+    outline: none;
+    width: 450px;
+    margin: 8px 0px;
+}
+.email-number label {
+    color: gray;
+}
+.email-number {
+    border-bottom: 1px solid gray;
+    margin: 10px 0px;
+}
+.line1 {
+    margin: 0px !important;
+}
+.whiteCard p {
+    /* margin-top: 40px; */
+    color: gray;
+    font-size: 13px;
+}
+.whiteCard p span {
+    color: blue;
+}
+.otpBtn button {
+    width: 450px;
+    border: none;
+    background-color: rgb(251, 100, 27);
+    color: white;
+    padding: 9px;
+    font-size: 19px;
+}
+.loginBtn {
+    margin: 12px 0px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+.loginBtn button {
+    width: 450px;
+    border: none;
+    background-color: white;
+    color: rgb(40, 116, 240);
+    padding: 11px;
+    font-size: 15px;
+    font-weight: 600;
+}
+.whiteCard h6 {
+    color: rgb(40, 116, 240);
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    height: 15vh;
+    font-size: 15px;
+    cursor: pointer;
+}
+.signupEmail {
+    border-bottom: 1px solid gray;
+    margin: 10px 0px;
+}
+.no-border {
+    border-bottom: none;
+}
+.signupEmail label {
+    color: grey;
+}
+.signupEmail input {
+    border: none;
+    outline: none;
+    width: 450px;
+    margin: 8px 0px;
+}
