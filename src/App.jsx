@@ -7,14 +7,14 @@ import LoginPage from "./Components/LoginPage.jsx";
 function App() {
   return (
     <>
-      {/* <div>
+      <div>
         <AccountMenu />
         <div className="homeDiv">
           <Sidebar />
           <PageRoutes />
         </div>
-      </div> */}
-      <LoginPage />
+      </div>
+      {/* <LoginPage /> */}
     </>
   );
 }
