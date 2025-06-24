@@ -16,8 +16,7 @@ const PageRoutes = () => {
     <>
       <Suspense>
         <Routes>
-          <Route path="/LoginPage" element={<LoginPage />} />
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
           <Route path="/categoryCard" element={<CategoryCard />} />
           <Route path="/subCategory" element={<SubCategory />} />
           <Route path="/brand" element={<Brand />} />
