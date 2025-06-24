@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BackEndApi } from "./utils/httpclint";
 
 const Loginpage = () => {
   const [login, setLogin] = useState(false);
@@ -16,7 +17,7 @@ const Loginpage = () => {
 
   const handleUserClick = async () => {
     try {
-      const endPoint = login ? "/user/createUser" : "/user/userLogin";
+      const endPoint = login ? "/userAdmin/createUserAdmin" : "/userAdmin/userLoginAdmin";
       const Response = await BackEndApi.post(endPoint, signInput);
       console.log(Response);
       const { token } = Response.data.data;
@@ -42,28 +43,37 @@ const Loginpage = () => {
             </div>
           </div>
           <div className="whiteCard">
-            <div className="email-number">
-              <label htmlFor="">
-                {login ? "Full Name" : "Enter Email/Phone Number"}
-              </label>
-              <br />
-              <input type="text" name="fullname" onChange={handleUserInput} />
-            </div>
-            <div className="signupEmail">
-              <label htmlFor="">{login ? "Email" : "Password"}</label>
-              <br />
-              <input type="text" name="password" onChange={handleUserInput} />
-            </div>
-            <div className={login ? "signupEmail" : "signupEmail no-border"}>
-              <label htmlFor="">{login ? "Phone Number" : ""}</label>
-              <br />
-              <input type="text" name="password" onChange={handleUserInput} />
-            </div>
-            <div className={login ? "signupEmail" : "signupEmail no-border"}>
-              <label htmlFor="">{login ? "Password" : ""}</label>
-              <br />
-              <input type="text" name="password" onChange={handleUserInput} />
-            </div>
+            {login ? (
+              <>
+                <div className="email-number">
+                  <label htmlFor="">Full Name</label><br />
+                  <input type="text" name="name" onChange={handleUserInput} />
+                </div>
+                <div className="email-number">
+                  <label htmlFor="">Email</label><br />
+                  <input type="text" name="email" onChange={handleUserInput} />
+                </div>
+                <div className="email-number">
+                  <label htmlFor="">Phone Number</label><br />
+                  <input type="text" name="phone" onChange={handleUserInput} />
+                </div>
+                <div className="email-number">
+                  <label htmlFor="">Password</label><br />
+                  <input type="password" name="password" onChange={handleUserInput} />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="email-number">
+                  <label htmlFor="">Enter Email</label><br />
+                  <input type="text" name="loginEmail" onChange={handleUserInput} />
+                </div>
+                <div className="email-number">
+                  <label htmlFor="">Enter Password</label><br />
+                  <input type="password" name="loginPassword" onChange={handleUserInput} />
+                </div>
+              </>
+            )}
             <p>
               By continuing, you agree to Flipkart's <span>Terms of Use</span>{" "}
               and <span>Privacy Policy</span>.
