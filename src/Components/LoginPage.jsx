@@ -83,18 +83,14 @@ const Loginpage = () => {
                 <div className="email-number">
                   <label htmlFor="">Enter Email</label>
                   <br />
-                  <input
-                    type="text"
-                    name="loginEmail"
-                    onChange={handleUserInput}
-                  />
+                  <input type="text" name="email" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
                   <label htmlFor="">Enter Password</label>
                   <br />
                   <input
                     type="password"
-                    name="loginPassword"
+                    name="password"
                     onChange={handleUserInput}
                   />
                 </div>

@@ -14,7 +14,7 @@ const PageRoutes = () => {
 
   return (
     <>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
