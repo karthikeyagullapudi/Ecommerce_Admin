@@ -719,7 +719,7 @@ body,
 .whiteCard {
     width: 550px;
     background-color: white;
-    height: 536px;
+    /* height: 536px; */
     padding: 50px 35px;
 }
 .email-number input {

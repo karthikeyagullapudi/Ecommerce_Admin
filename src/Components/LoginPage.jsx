@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { BackEndApi } from "./utils/httpclint";
-import { Link, useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const Loginpage = () => {
   const [login, setLogin] = useState(false);
   const [signInput, setSignInput] = useState({});
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const handleUserInput = (event) => {
     setSignInput({ ...signInput, [event.target.name]: event.target.value });
   };
@@ -20,15 +18,13 @@ const Loginpage = () => {
 
   const handleUserClick = async () => {
     try {
-      const endPoint = login
-        ? "/userAdmin/createUserAdmin"
-        : "/userAdmin/userLoginAdmin";
+      const endPoint = login ? "/userAdmin/createUserAdmin" : "/userAdmin/userLoginAdmin";
       const Response = await BackEndApi.post(endPoint, signInput);
       console.log(Response);
       const { token } = Response.data.data;
       localStorage.setItem("authToken", token);
       if (Response) {
-        navigate("/dashboard");
+        navigate("/dashboard")
       }
     } catch (error) {
       console.log(error);
@@ -54,45 +50,31 @@ const Loginpage = () => {
             {login ? (
               <>
                 <div className="email-number">
-                  <label htmlFor="">Full Name</label>
-                  <br />
+                  <label htmlFor="">Full Name</label><br />
                   <input type="text" name="name" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
-                  <label htmlFor="">Email</label>
-                  <br />
+                  <label htmlFor="">Email</label><br />
                   <input type="text" name="email" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
-                  <label htmlFor="">Phone Number</label>
-                  <br />
+                  <label htmlFor="">Phone Number</label><br />
                   <input type="text" name="phone" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
-                  <label htmlFor="">Password</label>
-                  <br />
-                  <input
-                    type="password"
-                    name="password"
-                    onChange={handleUserInput}
-                  />
+                  <label htmlFor="">Password</label><br />
+                  <input type="password" name="password" onChange={handleUserInput} />
                 </div>
               </>
             ) : (
               <>
                 <div className="email-number">
-                  <label htmlFor="">Enter Email</label>
-                  <br />
+                  <label htmlFor="">Enter Email</label><br />
                   <input type="text" name="email" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
-                  <label htmlFor="">Enter Password</label>
-                  <br />
-                  <input
-                    type="password"
-                    name="password"
-                    onChange={handleUserInput}
-                  />
+                  <label htmlFor="">Enter Password</label><br />
+                  <input type="password" name="password" onChange={handleUserInput} />
                 </div>
               </>
             )}
