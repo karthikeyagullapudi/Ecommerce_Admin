@@ -1,36 +1,27 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { BackEndApi } from "./utils/httpclint";
-import { useNavigate } from "react-router";
+import BackEndApi from "./utils/httpclint";
+import { useNavigate } from "react-router-dom";
 
-const Loginpage = () => {
-  const [login, setLogin] = useState(false);
-  const [signInput, setSignInput] = useState({});
-  const navigate = useNavigate()
+const LoginPage = () => {
+  const [login, setLogin] = useState({});
+  const navigate = useNavigate();
   const handleUserInput = (event) => {
-    setSignInput({ ...signInput, [event.target.name]: event.target.value });
+    setLogin({ ...login, [event.target.name]: event.target.value });
   };
-
-  const handleClick = async () => {
-    setLogin(true);
-  };
-  const handleOnClick = () => {
-    setLogin(false);
-  };
-
-  const handleUserClick = async () => {
+  const hadleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      // const endPoint = login
-      //   ? "/userAdmin/createUserAdmin"
-      //   : "/userAdmin/userLoginAdmin";
       const response = await BackEndApi.post(
         "/userAdmin/userLoginAdmin",
-        signInput
+        login
       );
       console.log(response);
-      if (response?.status === 200) {
-        console.log("success response");
-        localStorage.setItem("authToken", response.data.data.token);
-        await navigate("/dashboard");
+      const { token } = response.data.data;
+      if (response) {
+        navigate("/dashboard");
+        localStorage.setItem("authToken", token);
       }
     } catch (error) {
       console.log(error);
@@ -39,85 +30,41 @@ const Loginpage = () => {
 
   return (
     <>
-      <div className="loginCard">
-        <div className="fullWhiteCrad">
-          <div className="blueCard">
-            <h1>{login ? "Sign Up" : "Login"}</h1>
-            <h5>
-              {login
-                ? "Looks like you're new here! Sign up to get started"
-                : "Get access to your Orders, Wishlist and Recommendations"}
-            </h5>
-            <div className="flipkartlogin">
-              <img src="/src/assets/images/admin-removebg-preview.png" alt="" />
-            </div>
-          </div>
-          <div className="whiteCard">
-            {/* {login ? (
-              <>
-                <div className="email-number">
-                  <label htmlFor="">Full Name</label>
-
-                  <input type="text" name="name" onChange={handleUserInput} />
-                </div>
-                <div className="email-number">
-                  <label htmlFor="">Email</label>
-
-                  <input type="text" name="email" onChange={handleUserInput} />
-                </div>
-                <div className="email-number">
-                  <label htmlFor="">Phone Number</label>
-
-                  <input type="text" name="phone" onChange={handleUserInput} />
-                </div>
-                <div className="email-number">
-                  <label htmlFor="">Password</label>
-
-                  <input
-                    type="password"
-                    name="password"
-                    onChange={handleUserInput}
-                  />
-                </div>
-              </> */}
-            {/* ) : ( ) */}
-            <>
-              <form action="">
-                <div className="email-number">
-                  <label htmlFor="">Enter Email</label>
-                  <input type="text" name="email" onChange={handleUserInput} />
-                </div>
-                <div className="email-number">
-                  <label htmlFor="">Enter Password</label>
-                  <label htmlFor=""></label>
-                  <input
-                    type="password"
-                    name="password"
-                    onChange={handleUserInput}
-                  />
-                </div>
-              </form >
-            </>
-            {/* } */}
-            < p >
-              By continuing, you agree to Flipkart's <span>Terms of Use</span>{" "}
-              and < span > Privacy Policy</span >.
-            </p >
-            <div className="otpBtn">
-              <button onClick={handleUserClick}>Submit</button>
+      <div className="loginbackground">
+        <div className="mainLogin">
+          <form action="" onSubmit={hadleSubmit}>
+            <h1>Login</h1>
+            <div className="loginInputFileds">
+              <label htmlFor="username">Email</label>
+              <br />
+              <input
+                type="text"
+                name="email"
+                placeholder="Enter Your Email "
+                onChange={handleUserInput}
+              />
             </div>
 
-            <div className="loginBtn">
-              <button onClick={handleOnClick}>Existing User?Login in</button>
+            <div className="loginInputFileds">
+              <label htmlFor="username">Password</label>
+              <br />
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Your Password "
+                onChange={handleUserInput}
+              />
+            </div>
+            <div className="subBtn">
+              <button type="submit">Submit</button>
             </div>
 
-            {/* <div>
-              <h6 onClick={handleClick}>New to Flipkart? Create an account</h6>
-            </div> */}
-          </div >
-        </div >
-      </div >
+            <p>Already I have an Account</p>
+          </form>
+        </div>
+      </div>
     </>
   );
 };
-export default Loginpage;
+
+export default LoginPage;

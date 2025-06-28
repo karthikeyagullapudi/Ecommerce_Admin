@@ -792,3 +792,91 @@ body,
     width: 450px;
     margin: 8px 0px;
 }
+.loginbackground {
+  background-image: url("./assets/images/bg1.jpg");
+  height: 100vh;
+  background-size: cover;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.loginbackground::before {
+  position: absolute;
+  content: "";
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.mainLogin {
+  top: 130px;
+  right: 164px;
+  display: flex;
+  justify-content: center;
+  background-color: #88888824;
+  padding: 20px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 3px;
+  width: 380px;
+  /* height: 350px; */
+  position: absolute;
+  z-index: 2;
+}
+.mainLogin h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+.mainLogin p {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+}
+.loginInputFileds {
+  margin: 10px 0px;
+}
+.loginInputFileds label {
+  font-weight: 500;
+  font-size: 15px;
+  color: white;
+}
+.loginInputFileds input {
+  border: none;
+  outline: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  background-color: rgb(236, 230, 230);
+  color: black;
+  width: 300px;
+}
+input::placeholder {
+  color: black;
+}
+.subBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.subBtn button {
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  background-color: rgb(250, 61, 61);
+  color: white;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

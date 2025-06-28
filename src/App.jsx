@@ -3,29 +3,28 @@ import "../src/app.css";
 import PageRoutes from "./PageRoutes.jsx";
 import Header from "./Components/Common/Header.jsx";
 import Sidebar from "./Components/Common/sidebar.jsx";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 function App() {
-  const navigate = useNavigate();
-  const hideLayoutOnPaths = ["/"];
-  const showLayout = hideLayoutOnPaths.includes(window.location.pathname);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const checkAuthRoutes = () => {
+    const authRoutesArr = ["/"];
+    const result = authRoutesArr.includes(location.pathname);
+    console.log("is logged in result is===", result);
+    if (result) {
+      setIsLoggedIn(() => result);
+    }
+  };
 
   useEffect(() => {
-    console.log("path name===", window.location.pathname);
-    const token = localStorage.getItem("authToken");
-    if (token == undefined || token == null || token == "") {
-      navigate("/");
-    } else {
-      navigate(window.location.pathname);
-    }
-  }, [window.location]);
+    checkAuthRoutes();
+    console.log("after changing route ===", isLoggedIn);
+  }, [location.pathname]);
 
   return (
     <>
-      {!showLayout && <Header />}
+      {!isLoggedIn && <Header />}
       <div className="homeDiv">
-        {!showLayout && <Sidebar />}
+        {!isLoggedIn && <Sidebar />}
         <PageRoutes />
       </div>
     </>

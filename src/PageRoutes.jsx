@@ -11,10 +11,9 @@ const PageRoutes = () => {
   const ProductColor = lazy(() => import("./Components/ProductColor.jsx"));
   const AddProductStatic = lazy(() => import("./Components/aproduct.jsx"));
   const Dashboard = lazy(() => import("./Components/Dashboard.jsx"));
-
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={"Loading..."}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
