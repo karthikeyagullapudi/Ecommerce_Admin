@@ -11,12 +11,12 @@ const PageRoutes = () => {
   const ProductColor = lazy(() => import("./Components/ProductColor.jsx"));
   const AddProductStatic = lazy(() => import("./Components/aproduct.jsx"));
   const Dashboard = lazy(() => import("./Components/Dashboard.jsx"));
-
   return (
     <>
-      <Suspense>
+      <Suspense fallback={"Loading..."}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/categoryCard" element={<CategoryCard />} />
           <Route path="/subCategory" element={<SubCategory />} />
           <Route path="/brand" element={<Brand />} />

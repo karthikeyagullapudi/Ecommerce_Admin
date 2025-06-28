@@ -8,10 +8,22 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-export default function SubCategoryTable({ rows = [] }) {
+function createData(id, category, subcategory) {
+  return { id, category, subcategory };
+}
+
+const rows = [
+  createData(1, "Electronics", "Mobile"),
+  createData(2, "Fashion", "Men Clothing"),
+  createData(3, "Home Appliances", "Kitchen"),
+  createData(4, "Books", "Fiction"),
+  createData(5, "Toys", "Educational"),
+];
+
+export default function SubCategoryTable() {
   return (
     <TableContainer component={Paper} sx={{ marginTop: 4 }}>
-      <Table sx={{ minWidth: 650 }} aria-label="subcategory table">
+      <Table sx={{ minWidth: 650 }} aria-label="category table">
         <TableHead>
           <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
             <TableCell>
@@ -29,10 +41,10 @@ export default function SubCategoryTable({ rows = [] }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
-            <TableRow key={index}>
+          {rows.map((row) => (
+            <TableRow key={row.id}>
               <TableCell>
-                <strong className="category-serial-no">{index + 1}</strong>
+                <strong className="category-serial-no">{row.id}</strong>
               </TableCell>
               <TableCell>
                 <strong className="category-names">{row.category}</strong>
