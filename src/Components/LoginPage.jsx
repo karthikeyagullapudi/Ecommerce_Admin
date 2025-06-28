@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BackEndApi } from "./utils/httpclint";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+
 const Loginpage = () => {
   const [login, setLogin] = useState(false);
   const [signInput, setSignInput] = useState({});
@@ -18,13 +19,18 @@ const Loginpage = () => {
 
   const handleUserClick = async () => {
     try {
-      const endPoint = login ? "/userAdmin/createUserAdmin" : "/userAdmin/userLoginAdmin";
-      const Response = await BackEndApi.post(endPoint, signInput);
-      console.log(Response);
-      const { token } = Response.data.data;
-      localStorage.setItem("authToken", token);
-      if (Response) {
-        navigate("/dashboard")
+      // const endPoint = login
+      //   ? "/userAdmin/createUserAdmin"
+      //   : "/userAdmin/userLoginAdmin";
+      const response = await BackEndApi.post(
+        "/userAdmin/userLoginAdmin",
+        signInput
+      );
+      console.log(response);
+      if (response?.status === 200) {
+        console.log("success response");
+        localStorage.setItem("authToken", response.data.data.token);
+        await navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -47,65 +53,70 @@ const Loginpage = () => {
             </div>
           </div>
           <div className="whiteCard">
-            {login ? (
+            {/* {login ? (
               <>
                 <div className="email-number">
-                  <label htmlFor="">Full Name</label><br />
+                  <label htmlFor="">Full Name</label>
+
                   <input type="text" name="name" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
-                  <label htmlFor="">Email</label><br />
+                  <label htmlFor="">Email</label>
+
                   <input type="text" name="email" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
-                  <label htmlFor="">Phone Number</label><br />
+                  <label htmlFor="">Phone Number</label>
+
                   <input type="text" name="phone" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
-                  <label htmlFor="">Password</label><br />
-                  <input type="password" name="password" onChange={handleUserInput} />
+                  <label htmlFor="">Password</label>
+
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={handleUserInput}
+                  />
                 </div>
-              </>
-            ) : (
-              <>
+              </> */}
+            {/* ) : ( ) */}
+            <>
+              <form action="">
                 <div className="email-number">
-                  <label htmlFor="">Enter Email</label><br />
+                  <label htmlFor="">Enter Email</label>
                   <input type="text" name="email" onChange={handleUserInput} />
                 </div>
                 <div className="email-number">
-                  <label htmlFor="">Enter Password</label><br />
-                  <input type="password" name="password" onChange={handleUserInput} />
+                  <label htmlFor="">Enter Password</label>
+                  <label htmlFor=""></label>
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={handleUserInput}
+                  />
                 </div>
-              </>
-            )}
-            <p>
+              </form >
+            </>
+            {/* } */}
+            < p >
               By continuing, you agree to Flipkart's <span>Terms of Use</span>{" "}
-              and <span>Privacy Policy</span>.
-            </p>
+              and < span > Privacy Policy</span >.
+            </p >
             <div className="otpBtn">
-              <button
-                onClick={handleUserClick}
-                id="btn"
-                value={login ? "Continue" : "Submit"}
-              >
-                {login ? "Continue" : "Submit"}
-              </button>
+              <button onClick={handleUserClick}>Submit</button>
             </div>
-            {login && (
-              <div className="loginBtn">
-                <button onClick={handleOnClick}>Existing User?Login in</button>
-              </div>
-            )}
-            {!login && (
-              <div>
-                <h6 onClick={handleClick}>
-                  New to Flipkart? Create an account
-                </h6>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+
+            <div className="loginBtn">
+              <button onClick={handleOnClick}>Existing User?Login in</button>
+            </div>
+
+            {/* <div>
+              <h6 onClick={handleClick}>New to Flipkart? Create an account</h6>
+            </div> */}
+          </div >
+        </div >
+      </div >
     </>
   );
 };
