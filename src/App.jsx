@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      {!isLoggedIn && <AccountMenu />}
+      {!isLoggedIn && <Header />}
       <div className="homeDiv">
         {!isLoggedIn && <Sidebar />}
         <PageRoutes />
