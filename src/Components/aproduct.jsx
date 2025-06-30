@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BackEndApi } from "./utils/httpclint";
+import BackEndApi from "./utils/httpclint";
 
 const AddProductStatic = () => {
   const [data, setData] = useState({});

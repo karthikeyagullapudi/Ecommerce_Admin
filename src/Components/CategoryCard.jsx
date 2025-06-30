@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CategoryTable from "../Components/CategoryTable";
-import { BackEndApi } from "./utils/httpclint";
+import BackEndApi from "./utils/httpclint";
 
 const CategoryCard = () => {
   const [category, setCategory] = useState("");
