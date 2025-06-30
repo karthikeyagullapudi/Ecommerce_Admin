@@ -6,13 +6,13 @@ import Sidebar from "./Components/Common/sidebar.jsx";
 import "../src/app.css";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // keep your variable name
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
-    const authRoutesArr = ["/"]; // routes where we hide header/sidebar
+    const authRoutesArr = ["/"];
     const result = authRoutesArr.includes(location.pathname);
-    setIsLoggedIn(() => !result); // true means logged in → show layout
+    setIsLoggedIn(() => !result);
   }, [location.pathname]);
 
   return (
@@ -20,8 +20,7 @@ function App() {
       {isLoggedIn && <Header />}
       <div className="homeDiv">
         {isLoggedIn && <Sidebar />}
-        <PageRoutes /> {/* This renders your actual route components */}
-        {/* <Outlet /> Optional: for nested routing support */}
+        <PageRoutes />
       </div>
     </>
   );
