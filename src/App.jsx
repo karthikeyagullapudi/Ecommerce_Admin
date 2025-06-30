@@ -1,23 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import "../src/app.css";
+import { useEffect, useState } from "react";
+import { useLocation, Outlet } from "react-router-dom";
 import PageRoutes from "./PageRoutes.jsx";
 import Header from "./Components/Common/Header.jsx";
 import Sidebar from "./Components/Common/sidebar.jsx";
-import { useEffect, useState } from "react";
+import "../src/app.css";
+
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const checkAuthRoutes = () => {
-    const authRoutesArr = ["/"];
-    const result = authRoutesArr.includes(location.pathname);
-    console.log("is logged in result is===", result);
-    if (result) {
-      setIsLoggedIn(() => !result);
-    }
-  };
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // keep your variable name
+  const location = useLocation();
 
   useEffect(() => {
-    checkAuthRoutes();
-    console.log("after changing route ===", isLoggedIn);
+    const authRoutesArr = ["/"]; // routes where we hide header/sidebar
+    const result = authRoutesArr.includes(location.pathname);
+    setIsLoggedIn(() => !result); // true means logged in → show layout
   }, [location.pathname]);
 
   return (
@@ -25,7 +20,8 @@ function App() {
       {isLoggedIn && <Header />}
       <div className="homeDiv">
         {isLoggedIn && <Sidebar />}
-        <PageRoutes />
+        <PageRoutes /> {/* This renders your actual route components */}
+        {/* <Outlet /> Optional: for nested routing support */}
       </div>
     </>
   );

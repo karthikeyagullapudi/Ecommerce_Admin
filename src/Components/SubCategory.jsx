@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SubCategoryTable from "../Components/SubCategoryTable.jsx";
-import { BackEndApi } from "./utils/httpclint.js";
+import BackEndApi from "./utils/httpclint.js";
 
 const SubCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
