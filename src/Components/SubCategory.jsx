@@ -87,47 +87,49 @@ const SubCategory = () => {
   };
 
   return (
-    <div className="layout">
-      <form className="category-form-design" onSubmit={handleSubmit}>
-        <div className="category-container">
-          <h2 className="category-heading">Select Category</h2>
-          <div className="category-card">
-            <select
-              className="category-input"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              required
-            >
-              <option value="">Select a category</option>
-              {categories.map((cat) => (
-                <option key={cat._id} value={cat.category}>
-                  {cat.category}
-                </option>
-              ))}
-            </select>
+    <>
+      <div className="layout">
+        <form className="category-form-design" onSubmit={handleSubmit}>
+          <div className="category-container">
+            <h2 className="category-heading">Select Category</h2>
+            <div className="category-card">
+              <select
+                className="category-input"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                required
+              >
+                <option value="">Select a category</option>
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat.category}>
+                    {cat.category}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div className="category-container">
-          <h2 className="category-heading">Add Subcategory</h2>
-          <div className="category-card">
-            <input
-              type="text"
-              className="category-input"
-              placeholder="Enter subcategory name"
-              value={subCategoryName}
-              onChange={(e) => setSubCategoryName(e.target.value)}
-              required
-            />
-            <button type="submit" className="category-add-btn">
-              Add
-            </button>
+          <div className="category-container">
+            <h2 className="category-heading">Add Subcategory</h2>
+            <div className="category-card">
+              <input
+                type="text"
+                className="category-input"
+                placeholder="Enter subcategory name"
+                value={subCategoryName}
+                onChange={(e) => setSubCategoryName(e.target.value)}
+                required
+              />
+              <button type="submit" className="category-add-btn">
+                Add
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
 
-      <SubCategoryTable rows={subCategories} />
-    </div>
+        <SubCategoryTable rows={subCategories} />
+      </div>
+    </>
   );
 };
 

@@ -31,36 +31,42 @@ const LoginPage = () => {
   return (
     <>
       <div className="loginbackground">
-        <div className="mainLogin">
-          <form action="" onSubmit={hadleSubmit}>
-            <h1>Login</h1>
-            <div className="loginInputFileds">
-              <label htmlFor="username">Email</label>
-              <br />
-              <input
-                type="text"
-                name="email"
-                placeholder="Enter Your Email "
-                onChange={handleUserInput}
-              />
-            </div>
+        <div className="loginCard1">
+          <div className="mainLogin">
+            <form action="" onSubmit={hadleSubmit}>
+              <div className="clickShop">
+                <img src="../../src/assets/images/loginLogo-removebg-preview.png" alt="" />
+                <h1>Login</h1>
+              </div>
 
-            <div className="loginInputFileds">
-              <label htmlFor="username">Password</label>
-              <br />
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter Your Password "
-                onChange={handleUserInput}
-              />
-            </div>
-            <div className="subBtn">
-              <button type="submit">Submit</button>
-            </div>
+              <div className="loginInputFileds">
+                <label htmlFor="username">Email</label>
+                <br />
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Enter Your Email "
+                  onChange={handleUserInput}
+                />
+              </div>
 
-            <p>Already I have an Account</p>
-          </form>
+              <div className="loginInputFileds">
+                <label htmlFor="username">Password</label>
+                <br />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter Your Password "
+                  onChange={handleUserInput}
+                />
+              </div>
+              <div className="subBtn">
+                <button type="submit">Submit</button>
+              </div>
+
+              <p>Already I have an Account</p>
+            </form>
+          </div>
         </div>
       </div>
     </>

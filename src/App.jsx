@@ -5,13 +5,13 @@ import Header from "./Components/Common/Header.jsx";
 import Sidebar from "./Components/Common/sidebar.jsx";
 import { useEffect, useState } from "react";
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const checkAuthRoutes = () => {
     const authRoutesArr = ["/"];
     const result = authRoutesArr.includes(location.pathname);
     console.log("is logged in result is===", result);
     if (result) {
-      setIsLoggedIn(() => result);
+      setIsLoggedIn(() => !result);
     }
   };
 
@@ -22,9 +22,9 @@ function App() {
 
   return (
     <>
-      {!isLoggedIn && <Header />}
+      {isLoggedIn && <Header />}
       <div className="homeDiv">
-        {!isLoggedIn && <Sidebar />}
+        {isLoggedIn && <Sidebar />}
         <PageRoutes />
       </div>
     </>

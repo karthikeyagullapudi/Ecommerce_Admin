@@ -18,26 +18,28 @@ const Color = () => {
   };
 
   return (
-    <div className="layout">
-      <form onSubmit={handleSubmit} className="category-form-design">
-        <h2 className="category-heading">Add Color</h2>
-        <div className="category-card">
-          <input
-            type="text"
-            className="category-input"
-            placeholder="Enter color name"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-            required
-          />
-          <button type="submit" className="category-add-btn">
-            Add
-          </button>
-        </div>
-      </form>
+    <>
+      <div className="layout">
+        <form onSubmit={handleSubmit} className="category-form-design">
+          <h2 className="category-heading">Add Color</h2>
+          <div className="category-card">
+            <input
+              type="text"
+              className="category-input"
+              placeholder="Enter color name"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              required
+            />
+            <button type="submit" className="category-add-btn">
+              Add
+            </button>
+          </div>
+        </form>
 
-      <ColorsCategoryTable />
-    </div>
+        <ColorsCategoryTable />
+      </div>
+    </>
   );
 };
 

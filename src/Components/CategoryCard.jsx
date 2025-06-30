@@ -28,26 +28,28 @@ const CategoryCard = () => {
   };
 
   return (
-    <div className="layout">
-      <form onSubmit={handleSubmit} className="category-form-design">
-        <h2 className="category-heading">Add Category</h2>
-        <div className="category-card">
-          <input
-            type="text"
-            placeholder="Enter category name"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="category-input"
-            required
-          />
-          <button type="submit" className="category-add-btn">
-            Add
-          </button>
-        </div>
-      </form>
+    <>
+      <div className="layout">
+        <form onSubmit={handleSubmit} className="category-form-design">
+          <h2 className="category-heading">Add Category</h2>
+          <div className="category-card">
+            <input
+              type="text"
+              placeholder="Enter category name"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="category-input"
+              required
+            />
+            <button type="submit" className="category-add-btn">
+              Add
+            </button>
+          </div>
+        </form>
 
-      <CategoryTable />
-    </div>
+        <CategoryTable />
+      </div>
+    </>
   );
 };
 
