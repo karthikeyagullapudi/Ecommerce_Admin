@@ -1,15 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BrandCategoryTable from "../Components/BrandTable.jsx";
+import BackEndApi from "./utils/httpclint.js";
 
 const Brand = () => {
-  const [formData, setFormData] = useState({
-    category: "",
-    subcategory: "",
-    brand: "",
-  });
+  const [formData, setFormData] = useState({});
+
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+
+  // Fetch all categories on component mount
+  const getAllCategory = async () => {
+    try {
+      const response = await BackEndApi.get("/category/all-categories");
+      if (response?.status === 200) {
+        setCategories(response.data.data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch categories", error);
+    }
+  };
+
+  // Fetch subcategories by categoryId
+  const fetchSubCategories = async (categoryId) => {
+    try {
+      const response = await BackEndApi.get(
+        `/subcategory/get-subcategory/${categoryId}`
+      );
+      if (response?.status === 200) {
+        setSubCategories(response.data.data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch subcategories", error);
+    }
+  };
+
+  useEffect(() => {
+    getAllCategory();
+  }, []);
+
+  useEffect(() => {
+    if (formData.category) {
+      fetchSubCategories(formData.category);
+    } else {
+      setSubCategories([]);
+    }
+  }, [formData.category]);
 
   const HandleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const HandleClick = async (event) => {
@@ -23,9 +62,15 @@ const Brand = () => {
     }
 
     try {
-      // const response = await BackEndApi.post("/add-brand", formData);
-      console.log("Submitted data:", formData);
-      // Reset form
+      const payload = {
+        categoryId: category, // Send category ID
+        subCategory: subcategory, // Send subCategory name
+        brand,
+      };
+
+      const response = await BackEndApi.post("/brand/add-brand", payload);
+      console.log("Submitted:", response.data);
+
       setFormData({ category: "", subcategory: "", brand: "" });
     } catch (error) {
       console.error("Brand submission failed:", error);
@@ -48,11 +93,11 @@ const Brand = () => {
                 required
               >
                 <option value="">Select a category</option>
-                <option value="electronics">Electronics</option>
-                <option value="fashion">Fashion</option>
-                <option value="home">Home & Kitchen</option>
-                <option value="books">Books</option>
-                <option value="sports">Sports</option>
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>
+                    {cat.category}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -69,11 +114,11 @@ const Brand = () => {
                 required
               >
                 <option value="">Select a subcategory</option>
-                <option value="mobiles">Mobiles</option>
-                <option value="laptops">Laptops</option>
-                <option value="kitchen-appliances">Kitchen Appliances</option>
-                <option value="shoes">Shoes</option>
-                <option value="books-novels">Novels</option>
+                {subCategories.map((sub) => (
+                  <option key={sub._id} value={sub.subCategory}>
+                    {sub.subCategory}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

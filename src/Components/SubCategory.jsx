@@ -8,7 +8,6 @@ const SubCategory = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  // Fetch categories from backend
   const getAllCategory = async () => {
     try {
       const response = await BackEndApi.get("/category/all-categories");
@@ -20,11 +19,10 @@ const SubCategory = () => {
     }
   };
 
-  // Fetch subcategories for selected category (optional, only if needed)
   const fetchSubCategories = async (categoryId) => {
     try {
       const response = await BackEndApi.get(
-        `/subcategory/all-subcategories/${categoryId}`
+        `/subcategory/get-subcategory/${categoryId}`
       );
       if (response?.status === 200) {
         setSubCategories(response.data.data || []);
@@ -39,13 +37,10 @@ const SubCategory = () => {
   }, []);
 
   useEffect(() => {
-    const categoryObj = categories.find(
-      (cat) => cat.category === selectedCategory
-    );
-    if (categoryObj?._id) {
-      fetchSubCategories(categoryObj._id);
+    if (selectedCategory) {
+      fetchSubCategories(selectedCategory);
     }
-  }, [selectedCategory, categories]);
+  }, [selectedCategory]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,17 +50,9 @@ const SubCategory = () => {
       return;
     }
 
-    const categoryObj = categories.find(
-      (cat) => cat.category === selectedCategory
-    );
-    if (!categoryObj) {
-      alert("Invalid category selected.");
-      return;
-    }
-
     try {
       const payload = {
-        categoryId: categoryObj._id,
+        categoryId: selectedCategory,
         subCategory: subCategoryName,
       };
 
@@ -73,63 +60,62 @@ const SubCategory = () => {
         "/subcategory/add-subcategory",
         payload
       );
+
       if (response?.status === 201 || response?.status === 200) {
         alert("Subcategory added successfully!");
         setSubCategoryName("");
-        fetchSubCategories(categoryObj._id);
+        fetchSubCategories(selectedCategory);
       } else {
         alert("Failed to add subcategory.");
       }
     } catch (error) {
-      console.error("Error submitting subcategory:", error);
+      console.error("Error adding subcategory:", error);
       alert("Server error. Please try again.");
     }
   };
 
   return (
-    <>
-      <div className="layout">
-        <form className="category-form-design" onSubmit={handleSubmit}>
-          <div className="category-container">
-            <h2 className="category-heading">Select Category</h2>
-            <div className="category-card">
-              <select
-                className="category-input"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                required
-              >
-                <option value="">Select a category</option>
-                {categories.map((cat) => (
-                  <option key={cat._id} value={cat.category}>
-                    {cat.category}
-                  </option>
-                ))}
-              </select>
-            </div>
+    <div className="layout">
+      <form className="category-form-design" onSubmit={handleSubmit}>
+        <div className="category-container">
+          <h2 className="category-heading">Select Category</h2>
+          <div className="category-card">
+            <select
+              className="category-input"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              required
+            >
+              <option value="">Select a category</option>
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat._id}>
+                  {cat.category}
+                </option>
+              ))}
+            </select>
           </div>
+        </div>
 
-          <div className="category-container">
-            <h2 className="category-heading">Add Subcategory</h2>
-            <div className="category-card">
-              <input
-                type="text"
-                className="category-input"
-                placeholder="Enter subcategory name"
-                value={subCategoryName}
-                onChange={(e) => setSubCategoryName(e.target.value)}
-                required
-              />
-              <button type="submit" className="category-add-btn">
-                Add
-              </button>
-            </div>
+        <div className="category-container">
+          <h2 className="category-heading">Add Subcategory</h2>
+          <div className="category-card">
+            <input
+              type="text"
+              className="category-input"
+              placeholder="Enter subcategory name"
+              value={subCategoryName}
+              onChange={(e) => setSubCategoryName(e.target.value)}
+              required
+            />
+            <button type="submit" className="category-add-btn">
+              Add
+            </button>
           </div>
-        </form>
+        </div>
+      </form>
 
-        <SubCategoryTable rows={subCategories} />
-      </div>
-    </>
+      <SubCategoryTable rows={subCategories} />
+    </div>
   );
 };
 
