@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ColorsCategoryTable from "../Components/ProductColorTable.jsx";
+import BackEndApi from "./utils/httpclint.js"; // Adjust the path if needed
 
 const Color = () => {
   const [color, setColor] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (color.trim() === "") {
@@ -12,9 +13,24 @@ const Color = () => {
       return;
     }
 
-    alert(`Color added: ${color}`);
-    // TODO: Integrate with backend API
-    setColor("");
+    try {
+      const response = await BackEndApi.post("/color/add-color", {
+        color,
+      });
+
+      if (response.status === 201 || response.status === 200) {
+        alert("Color added successfully!");
+        setColor("");
+      } else {
+        alert("Failed to add color. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error adding color:", error);
+      const message =
+        error.response?.data?.message ||
+        "Something went wrong. Please try again.";
+      alert(message);
+    }
   };
 
   return (

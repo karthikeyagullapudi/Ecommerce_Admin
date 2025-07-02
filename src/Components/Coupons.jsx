@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import CouponsCategoryTable from "../Components/CouponsTable.jsx";
+import BackEndApi from "../Components/utils/httpclint.js";
 
 const Coupons = () => {
   const [coupon, setCoupon] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (coupon.trim() === "") {
@@ -12,9 +13,21 @@ const Coupons = () => {
       return;
     }
 
-    alert(`Coupon added: ${coupon}`);
-    // TODO: Connect to backend API
-    setCoupon("");
+    try {
+      const response = await BackEndApi.post("/coupon/add-coupon", {
+        coupon,
+      });
+
+      if (response.status === 201 || response.status === 200) {
+        alert("Coupon added successfully!");
+        setCoupon("");
+      } else {
+        alert("Failed to add coupon. Please try again.");
+      }
+    } catch (error) {
+      const message = error.response?.data?.message || "Something went wrong!";
+      alert(message);
+    }
   };
 
   return (

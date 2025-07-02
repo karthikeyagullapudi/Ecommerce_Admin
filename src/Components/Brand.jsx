@@ -64,12 +64,13 @@ const Brand = () => {
     try {
       const payload = {
         categoryId: category, // Send category ID
-        subCategory: subcategory, // Send subCategory name
+        subCategoryId: subcategory, // Send subCategory name
         brand,
       };
 
       const response = await BackEndApi.post("/brand/add-brand", payload);
       console.log("Submitted:", response.data);
+      alert("Brand added successfully!");
 
       setFormData({ category: "", subcategory: "", brand: "" });
     } catch (error) {
@@ -115,7 +116,7 @@ const Brand = () => {
               >
                 <option value="">Select a subcategory</option>
                 {subCategories.map((sub) => (
-                  <option key={sub._id} value={sub.subCategory}>
+                  <option key={sub._id} value={sub._id}>
                     {sub.subCategory}
                   </option>
                 ))}

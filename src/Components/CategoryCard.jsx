@@ -12,18 +12,33 @@ const CategoryCard = () => {
       alert("Please enter a category name.");
       return;
     }
+
     addCategory();
   };
 
   const addCategory = async () => {
     try {
       const response = await BackEndApi.post("/category/add-category", {
-        category,
+        category: category.trim(),
       });
-      console.log("Category added ====", response);
-      setCategory("");
+
+      if (response.status === 201 || response.status === 200) {
+        alert("Category added successfully!");
+        setCategory("");
+      }
     } catch (error) {
-      console.log(error);
+      const status = error.response?.status;
+      const message = error.response?.data?.message;
+
+      if (status === 409) {
+        alert("This category already exists.");
+      } else if (status === 422) {
+        alert(message || "Validation failed. Please check your input.");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+
+      console.log("Category error ====", error);
     }
   };
 
