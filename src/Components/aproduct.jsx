@@ -236,6 +236,16 @@ const AddProductStatic = () => {
               onChange={handleChange}
             />
 
+            <label>Quantity</label>
+            <input
+              type="number"
+              name="quantity"
+              placeholder="Enter quantity"
+              min="0"
+              required
+              onChange={handleChange}
+            />
+
             <label>Color</label>
             <select name="colors" required onChange={handleChange}>
               <option value="">Select Color</option>
@@ -284,6 +294,7 @@ const AddProductStatic = () => {
             <label>Warranty</label>
             <select name="warranty" required onChange={handleChange}>
               <option value="">Select Warranty</option>
+              <option value="0 Year">No Warranty</option>
               <option value="1 Year">1 Year</option>
               <option value="2 Years">2 Years</option>
               <option value="3 Years">3 Years</option>

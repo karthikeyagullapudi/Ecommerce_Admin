@@ -46,6 +46,9 @@ const Sidebar = () => {
           <Link to="/addProductStatic">Product</Link>
         </li>
         <li className="sidebar-link">
+          <Link to="/Product-List">Product-List</Link>
+        </li>
+        <li className="sidebar-link">
           <Link to="/vendor">Vendor</Link>
         </li>
       </ul>

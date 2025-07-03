@@ -12,6 +12,7 @@ const ProductColor = lazy(() => import("./Components/ProductColor.jsx"));
 const AddProductStatic = lazy(() => import("./Components/aproduct.jsx"));
 const Dashboard = lazy(() => import("./Components/Dashboard.jsx"));
 const ProfileCard = lazy(() => import("./Components/ProfileCard.jsx"));
+const AproductTable = lazy(() => import("./Components/aproductTable.jsx"));
 
 const PageRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const PageRoutes = () => {
         <Route path="/addProductStatic" element={<AddProductStatic />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profileCard" element={<ProfileCard />} />
+        <Route path="/Product-List" element={<AproductTable />} />
       </Routes>
     </Suspense>
   );
