@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
-
+import { Link } from "react-router";
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -107,10 +107,11 @@ const Header = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-
+        <Link to="/profileCard">
+          <MenuItem onClick={handleClose}>
+            <Avatar /> Profile
+          </MenuItem>
+        </Link>
         <Divider />
 
         <MenuItem onClick={handleLogout}>
