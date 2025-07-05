@@ -8,44 +8,44 @@ const SubCategory = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  const getAllCategory = async () => {
+  // Fetch all categories on mount
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
+  const getAllCategories = async () => {
     try {
       const response = await BackEndApi.get("/category/all-categories");
       if (response?.status === 200) {
         setCategories(response.data.data || []);
       }
     } catch (error) {
-      console.error("Failed to fetch categories", error);
+      console.error("Failed to fetch categories:", error);
     }
   };
 
-  const fetchSubCategories = async (categoryId) => {
-    try {
-      const response = await BackEndApi.get(
-        `/subcategory/get-subcategory/${categoryId}`
-      );
-      if (response?.status === 200) {
-        setSubCategories(response.data.data || []);
-      }
-    } catch (error) {
-      console.error("Failed to fetch subcategories", error);
-    }
-  };
-
-  useEffect(() => {
-    getAllCategory();
-  }, []);
-
+  // Fetch subcategories whenever a category is selected
   useEffect(() => {
     if (selectedCategory) {
       fetchSubCategories(selectedCategory);
     }
   }, [selectedCategory]);
 
+  const fetchSubCategories = async (categoryId) => {
+    try {
+      const response = await BackEndApi.get(`/subcategory/get-subcategory/${categoryId}`);
+      if (response?.status === 200) {
+        setSubCategories(response.data.data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch subcategories:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedCategory || !subCategoryName) {
+    if (!selectedCategory || !subCategoryName.trim()) {
       alert("Please select a category and enter a subcategory name.");
       return;
     }
@@ -53,30 +53,29 @@ const SubCategory = () => {
     try {
       const payload = {
         categoryId: selectedCategory,
-        subCategory: subCategoryName,
+        subCategory: subCategoryName.trim(),
       };
 
-      const response = await BackEndApi.post(
-        "/subcategory/add-subcategory",
-        payload
-      );
+      const response = await BackEndApi.post("/subcategory/add-subcategory", payload);
 
       if (response?.status === 201 || response?.status === 200) {
         alert("Subcategory added successfully!");
         setSubCategoryName("");
-        fetchSubCategories(selectedCategory);
+        fetchSubCategories(selectedCategory); // Refresh table
       } else {
         alert("Failed to add subcategory.");
       }
     } catch (error) {
       console.error("Error adding subcategory:", error);
-      alert("Server error. Please try again.");
+      const message = error?.response?.data?.message || "Server error. Please try again.";
+      alert(message);
     }
   };
 
   return (
     <div className="layout">
       <form className="category-form-design" onSubmit={handleSubmit}>
+        {/* Category Select */}
         <div className="category-container">
           <h2 className="category-heading">Select Category</h2>
           <div className="category-card">
@@ -96,6 +95,7 @@ const SubCategory = () => {
           </div>
         </div>
 
+        {/* Subcategory Input */}
         <div className="category-container">
           <h2 className="category-heading">Add Subcategory</h2>
           <div className="category-card">
@@ -114,6 +114,7 @@ const SubCategory = () => {
         </div>
       </form>
 
+      {/* Subcategory Table */}
       <SubCategoryTable rows={subCategories} />
     </div>
   );

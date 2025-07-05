@@ -78,7 +78,7 @@ const rows = [
 
 const aproductTable = () => {
   return (
-    <TableContainer component={Paper} sx={{ marginTop: 4 }}>
+    <TableContainer component={Paper} sx={{ margin: 2 }}>
       <Table sx={{ minWidth: 1300 }} aria-label="product table">
         <TableHead>
           <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
