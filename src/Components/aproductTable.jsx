@@ -83,46 +83,46 @@ const aproductTable = () => {
         <TableHead>
           <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
             <TableCell>
-              <strong>S.No</strong>
+              <strong className="product-heading">S.No</strong>
             </TableCell>
             <TableCell>
-              <strong>Category</strong>
+              <strong className="product-heading">Category</strong>
             </TableCell>
             <TableCell>
-              <strong>Subcategory</strong>
+              <strong className="product-heading">Subcategory</strong>
             </TableCell>
             <TableCell>
-              <strong>Brand</strong>
+              <strong className="product-heading">Brand</strong>
             </TableCell>
             <TableCell>
-              <strong>Product Name</strong>
+              <strong className="product-heading">Product Name</strong>
             </TableCell>
             <TableCell>
-              <strong>Description</strong>
+              <strong className="product-heading">Description</strong>
             </TableCell>
             <TableCell>
-              <strong>Quantity</strong>
+              <strong className="product-heading">Quantity</strong>
             </TableCell>
             <TableCell>
-              <strong>Color</strong>
+              <strong className="product-heading">Color</strong>
             </TableCell>
             <TableCell>
-              <strong>Discount (%)</strong>
+              <strong className="product-heading">Discount (%)</strong>
             </TableCell>
             <TableCell>
-              <strong>Discount Price</strong>
+              <strong className="product-heading">Discount Price</strong>
             </TableCell>
             <TableCell>
-              <strong>Warranty</strong>
+              <strong className="product-heading">Warranty</strong>
             </TableCell>
             <TableCell>
-              <strong>Coupon</strong>
+              <strong className="product-heading">Coupon</strong>
             </TableCell>
             <TableCell>
-              <strong>Specifications</strong>
+              <strong className="product-heading">Specifications</strong>
             </TableCell>
             <TableCell align="center">
-              <strong>Action</strong>
+              <strong className="product-heading">Action</strong>
             </TableCell>
           </TableRow>
         </TableHead>
