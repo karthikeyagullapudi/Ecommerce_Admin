@@ -337,6 +337,7 @@ body,
 .sidebar-submenu li {
   text-decoration: none !important;
   color: black !important;
+  font-size: 15px;
 }
 
 /* Hover styles */
@@ -397,7 +398,7 @@ body,
 
 /* Category heading */
 .category-heading {
-  font-size: 24px;
+  font-size: 21px;
   margin-bottom: 20px;
   color: #4b3f72; /* matches header purple */
   font-weight: 700;
@@ -577,7 +578,7 @@ body,
 }
 
 .category-table-heading {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .category-serial-no {
@@ -587,23 +588,23 @@ body,
 
 .category-names {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 15px;
 }
 .category-sub-names {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 15px;
 }
 .category-brand-names {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 15px;
 }
 .category-coupon-names {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 15px;
 }
 .category-color-names {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .category-form-design {

@@ -8,58 +8,47 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-function createData(id, category) {
-  return { id, category };
-}
-
-const rows = [
-  createData(1, "Electronics"),
-  createData(2, "Fashion"),
-  createData(3, "Home Appliances"),
-  createData(4, "Books"),
-  createData(5, "Toys"),
-];
-const CategoryTable = () => {
+// ✅ Accept props
+const CategoryTable = ({ categories }) => {
   return (
-    <>
-      <TableContainer component={Paper} sx={{ marginTop: 4 }}>
-        <Table sx={{ minWidth: 650 }} aria-label="category table">
-          <TableHead>
-            <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
+    <TableContainer component={Paper} sx={{ marginTop: 4 }}>
+      <Table sx={{ minWidth: 650 }} aria-label="category table">
+        <TableHead>
+          <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
+            <TableCell>
+              <strong className="category-table-heading">S.No</strong>
+            </TableCell>
+            <TableCell>
+              <strong className="category-table-heading">Category</strong>
+            </TableCell>
+            <TableCell align="center">
+              <strong className="category-table-heading">Action</strong>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {categories?.map((row, index) => (
+            <TableRow key={row._id || index}>
               <TableCell>
-                <strong className="category-table-heading">S.No</strong>
+                <strong className="category-serial-no">{index + 1}</strong>
               </TableCell>
               <TableCell>
-                <strong className="category-table-heading">Category</strong>
+                <strong className="category-names">{row.category}</strong> {/* ✅ FIXED */}
               </TableCell>
               <TableCell align="center">
-                <strong className="category-table-heading">Action</strong>
+                <Button variant="contained" color="success" sx={{ mr: 1 }}>
+                  Edit
+                </Button>
+                <Button variant="contained" color="error">
+                  Delete
+                </Button>
               </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>
-                  <strong className="category-serial-no">{row.id}</strong>
-                </TableCell>
-                <TableCell>
-                  <strong className="category-names">{row.category}</strong>
-                </TableCell>
-                <TableCell align="center">
-                  <Button variant="contained" color="success" sx={{ mr: 1 }}>
-                    Edit
-                  </Button>
-                  <Button variant="contained" color="error">
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
+
 export default CategoryTable;
