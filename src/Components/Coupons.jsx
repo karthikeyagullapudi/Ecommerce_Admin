@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CouponsCategoryTable from "../Components/CouponsTable.jsx";
 import BackEndApi from "../Components/utils/httpclint.js";
 
 const Coupons = () => {
   const [coupon, setCoupon] = useState("");
+  const [couponList, setCouponList] = useState([]); // 🆕
+
+  const fetchCoupons = async () => {
+    try {
+      const response = await BackEndApi.get("/coupon/all-coupons");
+      if (response.status === 200) {
+        setCouponList(response.data.data || []);
+      }
+    } catch (error) {
+      console.error("Fetch coupons failed:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCoupons();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,12 +31,13 @@ const Coupons = () => {
 
     try {
       const response = await BackEndApi.post("/coupon/add-coupon", {
-        coupon,
+        coupon: coupon.trim(),
       });
 
       if (response.status === 201 || response.status === 200) {
         alert("Coupon added successfully!");
         setCoupon("");
+        fetchCoupons(); // 🆕 refresh table after add
       } else {
         alert("Failed to add coupon. Please try again.");
       }
@@ -31,28 +48,26 @@ const Coupons = () => {
   };
 
   return (
-    <>
-      <div className="layout">
-        <form onSubmit={handleSubmit} className="category-form-design">
-          <h2 className="category-heading">Add Coupon</h2>
-          <div className="category-card">
-            <input
-              type="text"
-              className="category-input"
-              placeholder="Enter coupon code"
-              value={coupon}
-              onChange={(e) => setCoupon(e.target.value)}
-              required
-            />
-            <button type="submit" className="category-add-btn">
-              Add
-            </button>
-          </div>
-        </form>
+    <div className="layout">
+      <form onSubmit={handleSubmit} className="category-form-design">
+        <h2 className="category-heading">Add Coupon</h2>
+        <div className="category-card">
+          <input
+            type="text"
+            className="category-input"
+            placeholder="Enter coupon code"
+            value={coupon}
+            onChange={(e) => setCoupon(e.target.value)}
+            required
+          />
+          <button type="submit" className="category-add-btn">
+            Add
+          </button>
+        </div>
+      </form>
 
-        <CouponsCategoryTable />
-      </div>
-    </>
+      <CouponsCategoryTable coupons={couponList} />
+    </div>
   );
 };
 

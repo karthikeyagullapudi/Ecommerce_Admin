@@ -4,15 +4,14 @@ import BackEndApi from "./utils/httpclint.js";
 
 const Brand = () => {
   const [formData, setFormData] = useState({});
-
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
+  const [brands, setBrands] = useState([]); // 🆕 brand list state
 
-  // Fetch all categories on component mount
-  const getAllCategory = async () => {
+  const fetchCategories = async () => {
     try {
       const response = await BackEndApi.get("/category/all-categories");
-      if (response?.status === 200) {
+      if (response.status === 200) {
         setCategories(response.data.data || []);
       }
     } catch (error) {
@@ -20,13 +19,10 @@ const Brand = () => {
     }
   };
 
-  // Fetch subcategories by categoryId
   const fetchSubCategories = async (categoryId) => {
     try {
-      const response = await BackEndApi.get(
-        `/subcategory/get-subcategory/${categoryId}`
-      );
-      if (response?.status === 200) {
+      const response = await BackEndApi.get(`/subcategory/get-subcategory/${categoryId}`);
+      if (response.status === 200) {
         setSubCategories(response.data.data || []);
       }
     } catch (error) {
@@ -34,8 +30,20 @@ const Brand = () => {
     }
   };
 
+  const fetchBrands = async () => {
+    try {
+      const response = await BackEndApi.get("/brand/all-brands");
+      if (response.status === 200) {
+        setBrands(response.data.data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch brands", error);
+    }
+  };
+
   useEffect(() => {
-    getAllCategory();
+    fetchCategories();
+    fetchBrands(); // 🆕 load brands initially
   }, []);
 
   useEffect(() => {
@@ -46,14 +54,13 @@ const Brand = () => {
     }
   }, [formData.category]);
 
-  const HandleChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const HandleClick = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     const { category, subcategory, brand } = formData;
 
     if (!category || !subcategory || !brand) {
@@ -63,90 +70,90 @@ const Brand = () => {
 
     try {
       const payload = {
-        categoryId: category, // Send category ID
-        subCategoryId: subcategory, // Send subCategory name
-        brand,
+        categoryId: category,
+        subCategoryId: subcategory,
+        brand: brand.trim(),
       };
 
       const response = await BackEndApi.post("/brand/add-brand", payload);
-      console.log("Submitted:", response.data);
-      alert("Brand added successfully!");
-
-      setFormData({ category: "", subcategory: "", brand: "" });
+      if (response.status === 201 || response.status === 200) {
+        alert("Brand added successfully!");
+        setFormData({ category: "", subcategory: "", brand: "" });
+        fetchBrands(); // ✅ Refresh the table
+      }
     } catch (error) {
+      alert("Failed to add brand.");
       console.error("Brand submission failed:", error);
     }
   };
 
   return (
-    <>
-      <div className="layout">
-        <form onSubmit={HandleClick} className="category-form-design">
-          {/* Category Selection */}
-          <div className="category-container">
-            <h2 className="category-heading">Select Category</h2>
-            <div className="category-card">
-              <select
-                name="category"
-                className="category-input"
-                value={formData.category}
-                onChange={HandleChange}
-                required
-              >
-                <option value="">Select a category</option>
-                {categories.map((cat) => (
-                  <option key={cat._id} value={cat._id}>
-                    {cat.category}
-                  </option>
-                ))}
-              </select>
-            </div>
+    <div className="layout">
+      <form onSubmit={handleSubmit} className="category-form-design">
+        {/* Category Selection */}
+        <div className="category-container">
+          <h2 className="category-heading">Select Category</h2>
+          <div className="category-card">
+            <select
+              name="category"
+              className="category-input"
+              value={formData.category || ""}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a category</option>
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat._id}>
+                  {cat.category}
+                </option>
+              ))}
+            </select>
           </div>
+        </div>
 
-          {/* Subcategory Selection */}
-          <div className="category-container">
-            <h2 className="category-heading">Select Subcategory</h2>
-            <div className="category-card">
-              <select
-                name="subcategory"
-                className="category-input"
-                value={formData.subcategory}
-                onChange={HandleChange}
-                required
-              >
-                <option value="">Select a subcategory</option>
-                {subCategories.map((sub) => (
-                  <option key={sub._id} value={sub._id}>
-                    {sub.subCategory}
-                  </option>
-                ))}
-              </select>
-            </div>
+        {/* Subcategory Selection */}
+        <div className="category-container">
+          <h2 className="category-heading">Select Subcategory</h2>
+          <div className="category-card">
+            <select
+              name="subcategory"
+              className="category-input"
+              value={formData.subcategory || ""}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a subcategory</option>
+              {subCategories.map((sub) => (
+                <option key={sub._id} value={sub._id}>
+                  {sub.subCategory}
+                </option>
+              ))}
+            </select>
           </div>
+        </div>
 
-          {/* Brand Input */}
-          <div className="category-container">
-            <h2 className="category-heading">Add Brand</h2>
-            <div className="category-card">
-              <input
-                type="text"
-                name="brand"
-                className="category-input"
-                placeholder="Enter brand name"
-                value={formData.brand}
-                onChange={HandleChange}
-                required
-              />
-              <button type="submit" className="category-add-btn">
-                Add
-              </button>
-            </div>
+        {/* Brand Input */}
+        <div className="category-container">
+          <h2 className="category-heading">Add Brand</h2>
+          <div className="category-card">
+            <input
+              type="text"
+              name="brand"
+              className="category-input"
+              placeholder="Enter brand name"
+              value={formData.brand || ""}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit" className="category-add-btn">
+              Add
+            </button>
           </div>
-        </form>
+        </div>
+      </form>
 
-        <BrandCategoryTable />
-      </div>
-    </>
+      <BrandCategoryTable brands={brands} />
+    </div>
   );
 };
 

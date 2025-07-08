@@ -83,66 +83,66 @@ const aproductTable = () => {
         <TableHead>
           <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
             <TableCell>
-              <strong className="product-heading">S.No</strong>
+              <strong className="category-table-heading1">S.No</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Category</strong>
+              <strong className="category-table-heading1">Category</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Subcategory</strong>
+              <strong className="category-table-heading1">Subcategory</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Brand</strong>
+              <strong className="category-table-heading1">Brand</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Product Name</strong>
+              <strong className="category-table-heading1">Product Name</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Description</strong>
+              <strong className="category-table-heading1">Description</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Quantity</strong>
+              <strong className="category-table-heading1">Quantity</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Color</strong>
+              <strong className="category-table-heading1">Color</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Discount (%)</strong>
+              <strong className="category-table-heading1">Discount (%)</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Discount Price</strong>
+              <strong className="category-table-heading1">Discount Price</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Warranty</strong>
+              <strong className="category-table-heading1">Warranty</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Coupon</strong>
+              <strong className="category-table-heading1">Coupon</strong>
             </TableCell>
             <TableCell>
-              <strong className="product-heading">Specifications</strong>
+              <strong className="category-table-heading1">Specifications</strong>
             </TableCell>
             <TableCell align="center">
-              <strong className="product-heading">Action</strong>
+              <strong className="category-table-heading1">Action</strong>
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.id}</TableCell>
-              <TableCell>{row.category}</TableCell>
-              <TableCell>{row.subcategory}</TableCell>
-              <TableCell>{row.brand}</TableCell>
-              <TableCell>{row.productName}</TableCell>
-              <TableCell>{row.description}</TableCell>
-              <TableCell>{row.quantity}</TableCell>
-              <TableCell>{row.color}</TableCell>
-              <TableCell>{row.discountPercent}</TableCell>
-              <TableCell>{row.discountPrice}</TableCell>
-              <TableCell>{row.warranty}</TableCell>
-              <TableCell>{row.coupon}</TableCell>
-              <TableCell>{row.specifications}</TableCell>
-              <TableCell align="center">
+              <TableCell><strong className="category-names1" >{row.id}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.category}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.subcategory}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.brand}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.productName}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.description}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.quantity}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.color}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.discountPercent}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.discountPrice}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.warranty}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.coupon}</strong></TableCell>
+              <TableCell><strong className="category-names1" >{row.specifications}</strong></TableCell>
+              <TableCell align="center" className="produvctbuttons">
                 <Button variant="contained" color="success" sx={{ mr: 1 }}>
                   Edit
                 </Button>
