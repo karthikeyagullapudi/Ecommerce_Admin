@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {
   Table,
   TableBody,
@@ -10,120 +10,68 @@ import {
   Button,
 } from "@mui/material";
 
-function createData(
-  id,
-  category,
-  subcategory,
-  brand,
-  productName,
-  description,
-  quantity,
-  color,
-  discountPercent,
-  discountPrice,
-  warranty,
-  coupon,
-  specifications
-) {
-  return {
-    id,
-    category,
-    subcategory,
-    brand,
-    productName,
-    description,
-    quantity,
-    color,
-    discountPercent,
-    discountPrice,
-    warranty,
-    coupon,
-    specifications,
-  };
-}
-
-// Example dummy data
 const rows = [
-  createData(
-    1,
-    "Electronics",
-    "Mobiles",
-    "Samsung",
-    "Galaxy S21",
-    "High-end smartphone",
-    50,
-    "Black",
-    10,
-    50000,
-    "1 Year",
-    "NEW10",
-    "RAM: 8GB, Storage: 128GB"
-  ),
-  createData(
-    2,
-    "Fashion",
-    "Men",
-    "Levis",
-    "Denim Jacket",
-    "Classic blue denim",
-    30,
-    "Blue",
-    20,
-    2000,
-    "6 Months",
-    "STYLE20",
-    "Size: L, Material: Cotton"
-  ),
+  {
+    id: 1,
+    category: "Electronics",
+    subcategory: "Mobiles",
+    brand: "Samsung",
+    productName: "Galaxy S21",
+    description: "High-end smartphone",
+    quantity: 50,
+    color: "Black",
+    discountPercent: 10,
+    discountPrice: 50000,
+    warranty: "1 Year",
+    coupon: "NEW10",
+    specifications: "RAM: 8GB, Storage: 128GB",
+    image: "https://via.placeholder.com/80",
+  },
+  {
+    id: 2,
+    category: "Fashion",
+    subcategory: "Men",
+    brand: "Levis",
+    productName: "Denim Jacket",
+    description: "Classic blue denim",
+    quantity: 30,
+    color: "Blue",
+    discountPercent: 20,
+    discountPrice: 2000,
+    warranty: "6 Months",
+    coupon: "STYLE20",
+    specifications: "Size: L, Material: Cotton",
+    image: "https://via.placeholder.com/80",
+  },
 ];
 
-const aproductTable = () => {
+const AProductTable = () => {
   return (
     <TableContainer component={Paper} sx={{ margin: 2 }}>
-      <Table sx={{ minWidth: 1300 }} aria-label="product table">
+      <Table sx={{ minWidth: 1400 }} aria-label="product table">
         <TableHead>
           <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
-            <TableCell>
-              <strong className="product-heading">S.No</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Category</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Subcategory</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Brand</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Product Name</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Description</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Quantity</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Color</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Discount (%)</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Discount Price</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Warranty</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Coupon</strong>
-            </TableCell>
-            <TableCell>
-              <strong className="product-heading">Specifications</strong>
-            </TableCell>
-            <TableCell align="center">
-              <strong className="product-heading">Action</strong>
-            </TableCell>
+            {[
+              "S.No",
+              "Category",
+              "Subcategory",
+              "Brand",
+              "Product Name",
+              "Description",
+              "Quantity",
+              "Color",
+              "Discount (%)",
+              "Discount Price",
+              "Warranty",
+              "Coupon",
+              "Specifications",
+              "Image",
+              "Action",
+            ].map((header) => (
+              <TableCell key={header}>
+                <strong className="product-heading">{header}</strong>
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -142,6 +90,19 @@ const aproductTable = () => {
               <TableCell>{row.warranty}</TableCell>
               <TableCell>{row.coupon}</TableCell>
               <TableCell>{row.specifications}</TableCell>
+              <TableCell>
+                <img
+                  src={row.image}
+                  alt={row.productName}
+                  width={80}
+                  height={80}
+                  style={{
+                    objectFit: "cover",
+                    borderRadius: 4,
+                    border: "1px solid grey",
+                  }}
+                />
+              </TableCell>
               <TableCell align="center">
                 <Button variant="contained" color="success" sx={{ mr: 1 }}>
                   Edit
@@ -158,4 +119,4 @@ const aproductTable = () => {
   );
 };
 
-export default aproductTable;
+export default AProductTable;
