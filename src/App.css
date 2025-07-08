@@ -951,7 +951,11 @@ input[type="number"] {
     font-size: 20px;
     text-align: center;
 }
-.produvctbuttons{
-  width: 186px !important;
-
-  }
+.produvctbuttons {
+    width: 186px !important;
+}
+.productable {
+    text-align: center !important;
+    width: 100px !important;
+    padding: 2px !important;
+}
