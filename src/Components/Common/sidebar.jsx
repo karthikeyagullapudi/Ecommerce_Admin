@@ -15,10 +15,11 @@ const Sidebar = () => {
   return (
     <aside className="app-sidebar">
       <ul>
-        <li className="sidebar-link">
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-
+        <Link to="/dashboard">
+          <li className="sidebar-link">
+            Dashboard
+          </li>
+        </Link>
         <li className="sidebar-button" onClick={toggleMaster}>
           Master{" "}
           <span className={`arrow ${isMasterOpen ? "rotate" : ""}`}>
@@ -28,21 +29,31 @@ const Sidebar = () => {
 
         {isMasterOpen && (
           <ul className="sidebar-submenu">
-            <li className="submenu-link">
-              <Link to="/categoryCard">Category</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/subCategory">Subcategory</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/brand">Brand</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/coupons">Coupons</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/color">Colors</Link>
-            </li>
+            <Link to="/categoryCard">
+              <li className="submenu-link">
+                Category
+              </li>
+            </Link>
+            <Link to="/subCategory">
+              <li className="submenu-link">
+                Subcategory
+              </li>
+            </Link>
+            <Link to="/brand">
+              <li className="submenu-link">
+                Brand
+              </li>
+            </Link>
+            <Link to="/coupons">
+              <li className="submenu-link">
+                Coupons
+              </li>
+            </Link>
+            <Link to="/color">
+              <li className="submenu-link">
+                Colors
+              </li>
+            </Link>
           </ul>
         )}
         <li className="sidebar-button" onClick={toggleProduct}>
@@ -54,19 +65,23 @@ const Sidebar = () => {
 
         {isProductOpen && (
           <ul className="sidebar-submenu">
-            <li className="submenu-link">
-              <Link to="/addProductStatic">Add Product</Link>
-            </li>
-            <li className="submenu-link">
-              <Link to="/Product-List">Product List</Link>
-            </li>
-
+            <Link to="/addProductStatic">
+              <li className="submenu-link">
+                Add Product
+              </li>
+            </Link>
+            <Link to="/Product-List">
+              <li className="submenu-link">
+                Product List
+              </li>
+            </Link>
           </ul>
         )}
-
-        <li className="sidebar-link">
-          <Link to="/vendor">Vendor</Link>
-        </li>
+        <Link to="/vendor">
+          <li className="sidebar-link">
+            Vendor
+          </li>
+        </Link>
       </ul>
     </aside>
   );
