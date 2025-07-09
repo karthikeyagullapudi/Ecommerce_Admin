@@ -21,7 +21,9 @@ const Brand = () => {
 
   const fetchSubCategories = async (categoryId) => {
     try {
-      const response = await BackEndApi.get(`/subcategory/get-subcategory/${categoryId}`);
+      const response = await BackEndApi.get(
+        `/subcategory/get-subcategory/${categoryId}`
+      );
       if (response.status === 200) {
         setSubCategories(response.data.data || []);
       }
