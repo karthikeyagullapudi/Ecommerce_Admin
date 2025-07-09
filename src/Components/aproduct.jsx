@@ -182,7 +182,7 @@ const AddProductStatic = () => {
   };
 
   return (
-    <div className="layout">
+    <div className="layout1">
       <div className="add-product-container">
         <form className="add-product-form" onSubmit={handleSubmit}>
           <h2>Add New Product</h2>

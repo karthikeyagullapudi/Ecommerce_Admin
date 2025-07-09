@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { FaHome } from "react-icons/fa";
+import { BiCategory } from "react-icons/bi";
+import { FaBoxOpen } from "react-icons/fa";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-
 const Sidebar = () => {
   const [isMasterOpen, setIsMasterOpen] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
@@ -11,80 +14,43 @@ const Sidebar = () => {
   const toggleProduct = () => {
     setIsProductOpen(!isProductOpen);
   };
-
   return (
-    <aside className="app-sidebar">
-      <ul>
-        <Link to="/dashboard">
-          <li className="sidebar-link">
-            Dashboard
-          </li>
-        </Link>
-        <li className="sidebar-button" onClick={toggleMaster}>
-          Master{" "}
-          <span className={`arrow ${isMasterOpen ? "rotate" : ""}`}>
-            &#9654;
-          </span>
-        </li>
-
-        {isMasterOpen && (
-          <ul className="sidebar-submenu">
+    <>
+      <div className="sidebarCon">
+        <ul>
+          <Link to="/dashboard">
+            <li className="Dashboard"><FaHome className="sidebarIcons" />Dashboard</li>
+          </Link>
+          <li><BiCategory className="sidebarIcons" />Master<MdKeyboardArrowRight className="ArrowRight" onClick={toggleMaster} /></li>
+          {isMasterOpen && <ul>
             <Link to="/categoryCard">
-              <li className="submenu-link">
-                Category
-              </li>
+              <li>Category</li>
             </Link>
             <Link to="/subCategory">
-              <li className="submenu-link">
-                Subcategory
-              </li>
+              <li>SubCategory</li>
             </Link>
             <Link to="/brand">
-              <li className="submenu-link">
-                Brand
-              </li>
+              <li>Brand</li>
             </Link>
             <Link to="/coupons">
-              <li className="submenu-link">
-                Coupons
-              </li>
+              <li>Coupons</li>
             </Link>
             <Link to="/color">
-              <li className="submenu-link">
-                Colors
-              </li>
+              <li>Colors</li>
             </Link>
-          </ul>
-        )}
-        <li className="sidebar-button" onClick={toggleProduct}>
-          Product{" "}
-          <span className={`arrow ${isProductOpen ? "rotate" : ""}`}>
-            &#9654;
-          </span>
-        </li>
-
-        {isProductOpen && (
-          <ul className="sidebar-submenu">
+          </ul>}
+          <li><FaBoxOpen className="sidebarIcons" />Product<MdKeyboardArrowRight className="ArrowRight" onClick={toggleProduct} /></li>
+          {isProductOpen && <ul>
             <Link to="/addProductStatic">
-              <li className="submenu-link">
-                Add Product
-              </li>
+              <li>Add Product</li>
             </Link>
             <Link to="/Product-List">
-              <li className="submenu-link">
-                Product List
-              </li>
+              <li>Product List</li>
             </Link>
-          </ul>
-        )}
-        <Link to="/vendor">
-          <li className="sidebar-link">
-            Vendor
-          </li>
-        </Link>
-      </ul>
-    </aside>
-  );
-};
-
-export default Sidebar;
+          </ul>}
+        </ul>
+      </div>
+    </>
+  )
+}
+export default Sidebar
