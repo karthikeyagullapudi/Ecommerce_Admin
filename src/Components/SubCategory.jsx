@@ -81,7 +81,7 @@ const SubCategory = () => {
           <h2 className="category-heading">Select Category</h2>
           <div className="category-card">
             <select
-              className="category-input"
+              className="selectCate"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
               required

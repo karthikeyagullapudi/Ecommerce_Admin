@@ -1,127 +1,48 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import Logout from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router";
-import { Link } from "react-router";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
+import { RiLogoutCircleFill } from "react-icons/ri";
+
 const Header = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
   const navigate = useNavigate();
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [showMenu, setShowMenu] = useState(false);
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     navigate("/");
   };
 
-  return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          backgroundColor: "white",
-          justifyContent: "space-between",
-          textAlign: "center",
-          paddingLeft: "30px",
-          paddingRight: "30px",
-          paddingBottom: "10px",
-          paddingTop: "10px",
-        }}
-      >
-        <div>
-          <img
-            style={{ width: "125px" }}
-            src="/src/assets/images/pngwing.com.png"
-            alt=""
-          />
-        </div>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <Avatar
-              className="profice-icon"
-              sx={{
-                width: 45,
-                height: 45,
-                color: "#fff",
-                backgroundColor: "#027BD4",
-              }}
-            >
-              M
-            </Avatar>
-          </IconButton>
-        </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        slotProps={{
-          paper: {
-            elevation: 0,
-            sx: {
-              overflow: "visible",
-              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-              mt: 1.5,
-              "& .MuiAvatar-root": {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              "&::before": {
-                content: '""',
-                display: "block",
-                position: "absolute",
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
-                bgcolor: "background.paper",
-                transform: "translateY(-50%) rotate(45deg)",
-                zIndex: 0,
-              },
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        <Link to="/profileCard">
-          <MenuItem onClick={handleClose}>
-            <Avatar /> Profile
-          </MenuItem>
-        </Link>
-        <Divider />
+  const handleProfile = () => {
+    navigate("/profileCard");
+  };
 
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Menu>
-    </>
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
+  return (
+    <div className="Headersec">
+      <div className=" logoImg">
+        <img
+          src="/src/assets/images/flipkart-white-logo-download-png-701751694706835umimidcdyz-removebg-preview.png"
+          alt="Logo"
+        />
+      </div>
+
+      <div className=" logoutdiv">
+        <div onClick={toggleMenu}>
+          <button className="profile-button">P</button>
+          {showMenu && (
+            <ul className="dropdown-menu-list">
+              <li className="logoutSec" onClick={handleProfile}><FaUser />Profile</li>
+              <li className="logoutSec" onClick={handleLogout}><RiLogoutCircleFill />Logout</li>
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+
   );
-}
-export default Header
+};
+
+export default Header;

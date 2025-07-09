@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CategoryTable from "../Components/CategoryTable";
 import BackEndApi from "./utils/httpclint";
+import { IoSearchSharp } from "react-icons/io5";
 
 const CategoryCard = () => {
   const [category, setCategory] = useState("");
@@ -56,6 +57,12 @@ const CategoryCard = () => {
   return (
     <div className="layout">
       <form onSubmit={handleSubmit} className="category-form-design">
+        <div className="Search-Bar">
+          <div className="SearchBar">
+            <IoSearchSharp className="IoSearchSharp" />
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
         <h2 className="category-heading">Add Category</h2>
         <div className="category-card">
           <input

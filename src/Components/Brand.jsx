@@ -98,7 +98,7 @@ const Brand = () => {
           <div className="category-card">
             <select
               name="category"
-              className="category-input"
+              className="selectCate"
               value={formData.category || ""}
               onChange={handleChange}
               required
@@ -119,7 +119,7 @@ const Brand = () => {
           <div className="category-card">
             <select
               name="subcategory"
-              className="category-input"
+              className="selectCate"
               value={formData.subcategory || ""}
               onChange={handleChange}
               required

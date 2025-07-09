@@ -1,39 +1,39 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-
-const CouponsCategoryTable = ({ coupons }) => {
+import { CiEdit } from "react-icons/ci";
+import { RiDeleteBin6Line } from "react-icons/ri";
+const CouponsCategoryTable = () => {
     return (
-        <TableContainer component={Paper} sx={{ marginTop: 4 }}>
-            <Table sx={{ minWidth: 750 }} aria-label="coupon table">
-                <TableHead>
-                    <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
-                        <TableCell><strong className="category-table-heading">S.No</strong></TableCell>
-                        <TableCell><strong className="category-table-heading">Coupon</strong></TableCell>
-                        <TableCell align="center"><strong className="category-table-heading">Action</strong></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {coupons?.map((row, index) => (
-                        <TableRow key={row._id || index}>
-                            <TableCell><strong className="category-names">{index + 1}</strong></TableCell>
-                            <TableCell><strong className="category-names">{row.coupon}</strong></TableCell>
-                            <TableCell align="center">
-                                <Button variant="contained" color="success" sx={{ mr: 1 }}>Edit</Button>
-                                <Button variant="contained" color="error">Delete</Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
-};
-
-export default CouponsCategoryTable;
+        <>
+            <table style={{ "width": "100%" }}>
+                <thead>
+                    <tr className="tableHead">
+                        <th className="sNo">S.No</th>
+                        <th className="Category">Category</th>
+                        <th className="Category">SubCategory</th>
+                        <th className="Category">Brand</th>
+                        <th className="Category">Coupons</th>
+                        <th className="Action">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr className="tabledata">
+                        <td>1</td>
+                        <td>electronics</td>
+                        <td>electronics</td>
+                        <td>electronics</td>
+                        <td>electronics</td>
+                        <td><CiEdit className="CiEdit" /><RiDeleteBin6Line className="RiDeleteBin6Line" /></td>
+                    </tr>
+                    <tr className="tabledata">
+                        <td>2</td>
+                        <td>electronics</td>
+                        <td>electronics</td>
+                        <td>electronics</td>
+                        <td>electronics</td>
+                        <td><CiEdit className="CiEdit" /><RiDeleteBin6Line className="RiDeleteBin6Line" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </>
+    )
+}
+export default CouponsCategoryTable
