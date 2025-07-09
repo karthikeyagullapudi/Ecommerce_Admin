@@ -3,54 +3,86 @@ import { FaHome } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
 import { FaBoxOpen } from "react-icons/fa";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 const Sidebar = () => {
   const [isMasterOpen, setIsMasterOpen] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMaster = () => {
     setIsMasterOpen(!isMasterOpen);
   };
+
   const toggleProduct = () => {
     setIsProductOpen(!isProductOpen);
   };
+
+  
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
   return (
-    <>
-      <div className="sidebarCon">
-        <ul>
-          <Link to="/dashboard">
-            <li className="Dashboard"><FaHome className="sidebarIcons" />Dashboard</li>
-          </Link>
-          <li><BiCategory className="sidebarIcons" />Master<MdKeyboardArrowRight className="ArrowRight" onClick={toggleMaster} /></li>
-          {isMasterOpen && <ul>
+    <div className="sidebarCon">
+      <ul>
+        <Link to="/dashboard">
+          <li className={`Dashboard ${isActive("/dashboard") ? "active" : ""}`}>
+            <FaHome className="sidebarIcons" />Dashboard
+          </li>
+        </Link>
+
+        <li
+          className={isActive("/categoryCard") || isActive("/subCategory") ||
+            isActive("/brand") || isActive("/coupons") ||
+            isActive("/color") ? "active-parent" : ""}
+          onClick={toggleMaster}
+        >
+          <BiCategory className="sidebarIcons" />Master
+          <MdKeyboardArrowRight className="ArrowRight" />
+        </li>
+
+        {isMasterOpen && (
+          <ul>
             <Link to="/categoryCard">
-              <li>Category</li>
+              <li className={isActive("/categoryCard") ? "active" : ""}>Category</li>
             </Link>
             <Link to="/subCategory">
-              <li>SubCategory</li>
+              <li className={isActive("/subCategory") ? "active" : ""}>SubCategory</li>
             </Link>
             <Link to="/brand">
-              <li>Brand</li>
+              <li className={isActive("/brand") ? "active" : ""}>Brand</li>
             </Link>
             <Link to="/coupons">
-              <li>Coupons</li>
+              <li className={isActive("/coupons") ? "active" : ""}>Coupons</li>
             </Link>
             <Link to="/color">
-              <li>Colors</li>
+              <li className={isActive("/color") ? "active" : ""}>Colors</li>
             </Link>
-          </ul>}
-          <li><FaBoxOpen className="sidebarIcons" />Product<MdKeyboardArrowRight className="ArrowRight" onClick={toggleProduct} /></li>
-          {isProductOpen && <ul>
+          </ul>
+        )}
+
+        <li
+          className={isActive("/addProductStatic") || isActive("/Product-List") ? "active-parent" : ""}
+          onClick={toggleProduct}
+        >
+          <FaBoxOpen className="sidebarIcons" />Product
+          <MdKeyboardArrowRight className="ArrowRight" />
+        </li>
+
+        {isProductOpen && (
+          <ul>
             <Link to="/addProductStatic">
-              <li>Add Product</li>
+              <li className={isActive("/addProductStatic") ? "active" : ""}>Add Product</li>
             </Link>
             <Link to="/Product-List">
-              <li>Product List</li>
+              <li className={isActive("/Product-List") ? "active" : ""}>Product List</li>
             </Link>
-          </ul>}
-        </ul>
-      </div>
-    </>
-  )
-}
-export default Sidebar
+          </ul>
+        )}
+      </ul>
+    </div>
+  );
+};
+
+export default Sidebar;
