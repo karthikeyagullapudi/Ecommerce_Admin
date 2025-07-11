@@ -47,11 +47,7 @@ const CategoryTable = ({ categories }) => {
 
   return (
     <>
-<<<<<<< HEAD
       <table style={{ width: "100%" }}>
-=======
-      <table style={{ width: "80%" }}>
->>>>>>> 54a3d1714dcbd4626311e91eb89d218c2003afab
         <thead>
           <tr className="tableHead">
             <th className="sNo">S.No</th>
