@@ -6,13 +6,9 @@ import React, { useState, useEffect } from "react";
 const CategoryTable = ({ categories }) => {
   console.log(categories)
   const [categoryList, setCategoryList] = useState([]);
-<<<<<<< HEAD
   const [editIndex, setEditIndex] = useState(null);
   const [editedCategoryName, setEditedCategoryName] = useState("");
 
-=======
-  console.log("adfasffddf", categoryList);
->>>>>>> 54a3d1714dcbd4626311e91eb89d218c2003afab
   useEffect(() => {
     setCategoryList(categories);
   }, [categories]);
@@ -99,8 +95,4 @@ const CategoryTable = ({ categories }) => {
     </>
   );
 };
-<<<<<<< HEAD
-
-=======
->>>>>>> 54a3d1714dcbd4626311e91eb89d218c2003afab
 export default CategoryTable;

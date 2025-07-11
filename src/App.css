@@ -7,113 +7,113 @@ body {
     height: 92vh;
 }
 .loginbackground {
-  background-image: url("./assets/images/bg1.jpg");
-  height: 100vh;
-  background-size: cover;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+    background-image: url("./assets/images/bg1.jpg");
+    height: 100vh;
+    background-size: cover;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 .loginbackground::before {
-  position: absolute;
-  content: "";
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    content: "";
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .mainLogin {
-  /* top: 130px;
+    /* top: 130px;
     right: 164px; */
-  display: flex;
-  justify-content: center;
-  background-color: #88888824;
-  padding: 30px 20px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 3px;
-  width: 380px;
-  /* position: absolute; */
-  z-index: 2;
+    display: flex;
+    justify-content: center;
+    background-color: #88888824;
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 3px;
+    width: 380px;
+    /* position: absolute; */
+    z-index: 2;
 }
 .loginCard1 {
-  display: flex;
-  justify-content: end;
-  width: 80vw;
+    display: flex;
+    justify-content: end;
+    width: 80vw;
 }
 .mainLogin h1 {
-  color: white;
-  text-align: center;
-  margin-bottom: 15px;
-  margin-top: 5px;
+    color: white;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 5px;
 }
 .mainLogin p {
-  color: white;
-  text-align: center;
-  margin-top: 10px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
 }
 .loginInputFileds {
-  margin: 10px 0px;
+    margin: 10px 0px;
 }
 .loginInputFileds label {
-  font-weight: 500;
-  font-size: 15px;
-  color: white;
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
 }
 .loginInputFileds input {
-  border: none;
-  outline: none;
-  padding: 10px 10px;
-  border-radius: 5px;
-  background-color: rgb(236, 230, 230);
-  color: black;
-  width: 300px;
+    border: none;
+    outline: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    background-color: rgb(236, 230, 230);
+    color: black;
+    width: 300px;
 }
 input::placeholder {
-  color: black;
+    color: black;
 }
 .subBtn {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 .subBtn button {
-  border: none;
-  padding: 8px 18px;
-  border-radius: 20px;
-  background-color: rgb(250, 61, 61);
-  color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    background-color: rgb(250, 61, 61);
+    color: white;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type="number"] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 .sidebarUl {
-  background-color: white;
-  width: 250px;
+    background-color: white;
+    width: 250px;
 }
 .sidebarUl ul li {
-  text-decoration: none !important;
-  color: black !important;
+    text-decoration: none !important;
+    color: black !important;
 }
 .clickShop {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .clickShop img {
-  width: auto;
-  height: 60px;
+    width: auto;
+    height: 60px;
 }
 
 /* ##################### New-Styles #################### */
@@ -620,41 +620,56 @@ td {
     color: inherit;
 }
 .profilecard {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  background-color: white;
-  width: 50%;
-  height: 244px;
-  margin: 107px 335px;
-  padding: 20px 30px;
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 0px 8px;
-  border-radius: 5px;
-  gap: 40px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    width: 50%;
+    height: 244px;
+    margin: 107px 335px;
+    padding: 20px 30px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+        rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    border-radius: 5px;
+    gap: 40px;
 }
 .profilecard span {
-  margin-left: 15px;
-  font-weight: 400;
+    margin-left: 15px;
+    font-weight: 400;
 }
 .profilecard h1 {
-  margin-bottom: 25px;
-  margin-top: 0px;
+    margin-bottom: 25px;
+    margin-top: 0px;
 }
 .profilecard h6 {
-  font-size: 15px;
+    font-size: 15px;
 }
 .profileImg img {
-  height: 150px;
-  width: auto;
-  /* margin-right: 30px; */
-  border-radius: 80px;
+    height: 150px;
+    width: auto;
+    border-radius: 80px;
 }
-
-.product-heading {
-  font-size: 20px;
-  text-align: center;
+.Search-Bar {
+    display: flex;
+    justify-content: end;
 }
-.produvctbuttons {
-  width: 186px !important;
+.SearchBar {
+    margin: 10px 0px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border-bottom: 1px solid rgb(232, 230, 230);
+    background-color: #e9e9f0;
+    padding: 0px 5px;
+    border-radius: 5px;
+}
+.SearchBar input {
+    border: none;
+    outline: none;
+    padding: 10px;
+    background-color: #e9e9f0;
+}
+.IoSearchSharp {
+    width: 20px;
+    height: 20px;
 }
