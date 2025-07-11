@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BrandCategoryTable from "../Components/BrandTable.jsx";
 import BackEndApi from "./utils/httpclint.js";
+import { IoSearchSharp } from "react-icons/io5";
 
 const Brand = () => {
   const [formData, setFormData] = useState({});
@@ -90,6 +91,12 @@ const Brand = () => {
   return (
     <div className="layout">
       <form onSubmit={handleSubmit} className="category-form-design">
+        <div className="Search-Bar">
+          <div className="SearchBar">
+            <IoSearchSharp className="IoSearchSharp" />
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
         {/* Category Selection */}
         <div className="category-container">
           <h2 className="category-heading">Select Category</h2>
@@ -152,7 +159,10 @@ const Brand = () => {
         </div>
       </form>
 
-      <BrandCategoryTable brands={brands} />
+      <BrandCategoryTable
+        categories={categories}
+        subCategories={subCategories}
+        brands={brands} />
     </div>
   );
 };

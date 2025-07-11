@@ -1,9 +1,17 @@
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { IoSearchSharp } from "react-icons/io5";
 const AProductTable = () => {
   return (
     <>
+
       <div className="Productlayout">
+        <div className="Search-Bar">
+          <div className="SearchBar">
+            <IoSearchSharp className="IoSearchSharp" />
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
         <table style={{ "width": "100%" }}>
           <thead>
             <tr className="tableHead">

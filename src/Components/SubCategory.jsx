@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SubCategoryTable from "../Components/SubCategoryTable.jsx";
 import BackEndApi from "./utils/httpclint.js";
+import { IoSearchSharp } from "react-icons/io5";
 
 const SubCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -77,6 +78,12 @@ const SubCategory = () => {
   return (
     <div className="layout">
       <form className="category-form-design" onSubmit={handleSubmit}>
+        <div className="Search-Bar">
+          <div className="SearchBar">
+            <IoSearchSharp className="IoSearchSharp" />
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
         <div className="category-container">
           <h2 className="category-heading">Select Category</h2>
           <div className="category-card">
@@ -114,7 +121,10 @@ const SubCategory = () => {
         </div>
       </form>
 
-      <SubCategoryTable rows={subCategories} />
+      <SubCategoryTable
+        categories={categories}
+        subCategories={subCategories}
+      />
     </div>
   );
 };
