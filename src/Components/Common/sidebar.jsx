@@ -1,4 +1,5 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { RiArrowDownSLine } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
 import { FaBoxOpen } from "react-icons/fa";
@@ -18,7 +19,7 @@ const Sidebar = () => {
     setIsProductOpen(!isProductOpen);
   };
 
-  
+
   const isActive = (path) => {
     return location.pathname === path;
   };
@@ -33,17 +34,24 @@ const Sidebar = () => {
         </Link>
 
         <li
-          className={isActive("/categoryCard") || isActive("/subCategory") ||
-            isActive("/brand") || isActive("/coupons") ||
-            isActive("/color") ? "active-parent" : ""}
+          className={
+            isActive("/categoryCard") || isActive("/subCategory") ||
+              isActive("/brand") || isActive("/coupons") || isActive("/color")
+              ? "active-parent"
+              : ""
+          }
           onClick={toggleMaster}
         >
           <BiCategory className="sidebarIcons" />Master
-          <MdKeyboardArrowRight className="ArrowRight" />
+          {isMasterOpen ? (
+            <RiArrowDownSLine className="ArrowRight" />
+          ) : (
+            <MdKeyboardArrowRight className="ArrowRight" />
+          )}
         </li>
 
         {isMasterOpen && (
-          <ul>
+          <ul className="submenu">
             <Link to="/categoryCard">
               <li className={isActive("/categoryCard") ? "active" : ""}>Category</li>
             </Link>
@@ -63,15 +71,23 @@ const Sidebar = () => {
         )}
 
         <li
-          className={isActive("/addProductStatic") || isActive("/Product-List") ? "active-parent" : ""}
+          className={
+            isActive("/addProductStatic") || isActive("/Product-List")
+              ? "active-parent"
+              : ""
+          }
           onClick={toggleProduct}
         >
           <FaBoxOpen className="sidebarIcons" />Product
-          <MdKeyboardArrowRight className="ArrowRight" />
+          {isProductOpen ? (
+            <RiArrowDownSLine className="ArrowRight" />
+          ) : (
+            <MdKeyboardArrowRight className="ArrowRight" />
+          )}
         </li>
 
         {isProductOpen && (
-          <ul>
+          <ul className="submenu">
             <Link to="/addProductStatic">
               <li className={isActive("/addProductStatic") ? "active" : ""}>Add Product</li>
             </Link>

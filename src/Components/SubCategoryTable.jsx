@@ -1,6 +1,7 @@
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiTick } from "react-icons/ti";
+import { IoSearchSharp } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 
 const SubCategoryTable = ({ categories, subCategories }) => {
@@ -46,55 +47,66 @@ const SubCategoryTable = ({ categories, subCategories }) => {
   };
 
   return (
-    <table style={{ width: "100%" }}>
-      <thead>
-        <tr className="tableHead">
-          <th className="sNo">S.No</th>
-          <th className="Category">Category</th>
-          <th className="Category">SubCategory</th>
-          <th className="Action">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {subCategoryList.length > 0 ? (
-          subCategoryList.map((item, index) => (
-            <tr className="tabledata" key={item._id || index}>
-              <td>{index + 1}</td>
-              <td>{getCategoryName(item.categoryId)}</td>
-              <td>
-                {editIndex === index ? (
-                  <input
-                    type="text"
-                    value={editedSubCategory}
-                    onChange={(e) => setEditedSubCategory(e.target.value)}
-                  />
-                ) : (
-                  item.subCategory
-                )}
-              </td>
-              <td>
-                {editIndex === index ? (
-                  <TiTick className="TiTick" onClick={() => handleSave(item._id)} />
-                ) : (
-                  <CiEdit
-                    className="CiEdit"
-                    onClick={() => handleEdit(index, item.subCategory)}
-                  />
-                )}
-                <RiDeleteBin6Line
-                  className="RiDeleteBin6Line"
-                  onClick={() => handleDelete(item._id)}
-                />
-              </td>
-            </tr>
-          ))
-        ) : (
-          <tr>
-            <td colSpan="4">No SubCategories found</td>
+    <div className="addCategoryCard">
+      <div className="addcategory">
+        <h2 className="category-heading">Add SubCategory</h2>
+        <div className="Search-Bar">
+          <div className="SearchBar">
+            <IoSearchSharp className="IoSearchSharp" />
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
+      </div>
+      <table style={{ width: "100%" }}>
+        <thead>
+          <tr className="tableHead">
+            <th className="sNo">S.No</th>
+            <th className="Category">Category</th>
+            <th className="Category">SubCategory</th>
+            <th className="Action">Action</th>
           </tr>
-        )}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {subCategoryList.length > 0 ? (
+            subCategoryList.map((item, index) => (
+              <tr className="tabledata" key={item._id || index}>
+                <td>{index + 1}</td>
+                <td>{getCategoryName(item.categoryId)}</td>
+                <td>
+                  {editIndex === index ? (
+                    <input
+                      type="text"
+                      value={editedSubCategory}
+                      onChange={(e) => setEditedSubCategory(e.target.value)}
+                    />
+                  ) : (
+                    item.subCategory
+                  )}
+                </td>
+                <td>
+                  {editIndex === index ? (
+                    <TiTick className="TiTick" onClick={() => handleSave(item._id)} />
+                  ) : (
+                    <CiEdit
+                      className="CiEdit"
+                      onClick={() => handleEdit(index, item.subCategory)}
+                    />
+                  )}
+                  <RiDeleteBin6Line
+                    className="RiDeleteBin6Line"
+                    onClick={() => handleDelete(item._id)}
+                  />
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No SubCategories found</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

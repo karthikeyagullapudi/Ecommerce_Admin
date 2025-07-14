@@ -186,112 +186,152 @@ const AddProductStatic = () => {
       <div className="add-product-container">
         <form className="add-product-form" onSubmit={handleSubmit}>
           <h2>Add New Product</h2>
+          <div className="cate_Subcate">
+            <div className="row">
+              <div className="col-md-6 selectform">
+                <label>Category</label>
+                <select name="category" required onChange={handleChange}>
+                  <option value="">Select Category</option>
+                  {categories.map((cat) => (
+                    <option key={cat._id} value={cat._id}>
+                      {cat.category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="col-md-6 selectform">
+                <label>Subcategory</label>
+                <select name="subCategory" required onChange={handleChange}>
+                  <option value="">Select Subcategory</option>
+                  {subCategory.map((sub) => (
+                    <option key={sub._id} value={sub._id}>
+                      {sub.subCategory}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
 
-          <label>Category</label>
-          <select name="category" required onChange={handleChange}>
-            <option value="">Select Category</option>
-            {categories.map((cat) => (
-              <option key={cat._id} value={cat._id}>
-                {cat.category}
-              </option>
-            ))}
-          </select>
+          <div className="cate_Subcate">
+            <div className="row">
+              <div className="col-md-6 selectform">
+                <label>Brand</label>
+                <select name="brand" required onChange={handleChange}>
+                  <option value="">Select Brand</option>
+                  {brands.map((b) => (
+                    <option key={b._id} value={b.brand}>
+                      {b.brand}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="col-md-6 selectform">
+                <label>Coupon</label>
+                <select name="coupon" required onChange={handleChange}>
+                  <option value="">Select Coupon</option>
+                  {coupons.map((coupon) => (
+                    <option key={coupon._id} value={coupon.coupon}>
+                      {coupon.coupon}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
 
-          <label>Subcategory</label>
-          <select name="subCategory" required onChange={handleChange}>
-            <option value="">Select Subcategory</option>
-            {subCategory.map((sub) => (
-              <option key={sub._id} value={sub._id}>
-                {sub.subCategory}
-              </option>
-            ))}
-          </select>
+          <div className="cate_Subcate">
+            <div className="row">
+              <div className="col-md-6 selectform">
+                <label>Color</label>
+                <select name="colors" required onChange={handleChange}>
+                  <option value="">Select Color</option>
+                  {colors.map((color) => (
+                    <option key={color._id} value={color.color}>
+                      {color.color}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="col-md-6 selectform">
+                <label>Product Name</label>
+                <input
+                  type="text"
+                  name="productName"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </div>
 
-          <label>Brand</label>
-          <select name="brand" required onChange={handleChange}>
-            <option value="">Select Brand</option>
-            {brands.map((b) => (
-              <option key={b._id} value={b.brand}>
-                {b.brand}
-              </option>
-            ))}
-          </select>
+          <div className="cate_Subcate">
+            <div className="row">
+              <div className="col-md-6 selectform">
+                <label>Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  min="0"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-md-6 selectform">
+                <label>Discount (%)</label>
+                <input
+                  type="number"
+                  name="discount"
+                  min="0"
+                  max="100"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </div>
 
-          <label>Product Name</label>
-          <input
-            type="text"
-            name="productName"
-            required
-            onChange={handleChange}
-          />
-
+          <div className="cate_Subcate">
+            <div className="row">
+              <div className="col-md-6 selectform">
+                <label>Discount Price</label>
+                <input
+                  type="number"
+                  name="discountPrice"
+                  value={data.discountPrice || ""}
+                  readOnly
+                />
+              </div>
+              <div className="col-md-6 selectform">
+                <label>Warranty</label>
+                <select name="warranty" required onChange={handleChange}>
+                  <option value="">Select Warranty</option>
+                  <option value="0 Year">No Warranty</option>
+                  <option value="1 Year">1 Year</option>
+                  <option value="2 Years">2 Years</option>
+                  <option value="3 Years">3 Years</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className="cate_Subcate">
+            <div className="row">
+              <div className="col-md-6 selectform">
+                <label>Quantity</label>
+                <input
+                  type="number"
+                  name="quantity"
+                  min="0"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-md-6 selectform"></div>
+            </div>
+          </div>
           <label>Description</label>
           <textarea name="description" required onChange={handleChange} />
 
-          <label>Quantity</label>
-          <input
-            type="number"
-            name="quantity"
-            min="0"
-            required
-            onChange={handleChange}
-          />
-
-          <label>Color</label>
-          <select name="colors" required onChange={handleChange}>
-            <option value="">Select Color</option>
-            {colors.map((color) => (
-              <option key={color._id} value={color.color}>
-                {color.color}
-              </option>
-            ))}
-          </select>
-
-          <label>Price</label>
-          <input
-            type="number"
-            name="price"
-            min="0"
-            required
-            onChange={handleChange}
-          />
-
-          <label>Discount (%)</label>
-          <input
-            type="number"
-            name="discount"
-            min="0"
-            max="100"
-            required
-            onChange={handleChange}
-          />
-
-          <label>Discount Price</label>
-          <input
-            type="number"
-            name="discountPrice"
-            value={data.discountPrice || ""}
-            readOnly
-          />
-
-          <label>Warranty</label>
-          <select name="warranty" required onChange={handleChange}>
-            <option value="">Select Warranty</option>
-            <option value="0 Year">No Warranty</option>
-            <option value="1 Year">1 Year</option>
-            <option value="2 Years">2 Years</option>
-            <option value="3 Years">3 Years</option>
-          </select>
-
-          <label>Coupon</label>
-          <select name="coupon" required onChange={handleChange}>
-            <option value="">Select Coupon</option>
-            {coupons.map((coupon) => (
-              <option key={coupon._id} value={coupon.coupon}>
-                {coupon.coupon}
-              </option>
-            ))}
-          </select>
 
           <label>Specifications</label>
           <textarea name="specifications" required onChange={handleChange} />
@@ -302,7 +342,7 @@ const AddProductStatic = () => {
             <img
               src={imagePreview}
               alt="Preview"
-              style={{ height: "100px", marginTop: "10px" }}
+              style={{ height: "200px", marginTop: "10px", width: "300px" }}
             />
           )}
           <input
@@ -313,12 +353,14 @@ const AddProductStatic = () => {
             onChange={handleChange}
           />
 
-          <button type="submit" className="submit-btn">
-            Add Product
-          </button>
+          <div className="category-add-btn">
+            <button type="submit" >
+              Add Product
+            </button>
+          </div>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

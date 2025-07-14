@@ -46,7 +46,7 @@ const Brand = () => {
 
   useEffect(() => {
     fetchCategories();
-    fetchBrands(); // 🆕 load brands initially
+    fetchBrands();
   }, []);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const Brand = () => {
       if (response.status === 201 || response.status === 200) {
         alert("Brand added successfully!");
         setFormData({ category: "", subcategory: "", brand: "" });
-        fetchBrands(); // ✅ Refresh the table
+        fetchBrands();
       }
     } catch (error) {
       alert("Failed to add brand.");
@@ -93,68 +93,72 @@ const Brand = () => {
   return (
     <div className="layout">
       <form onSubmit={handleSubmit} className="category-form-design">
-        <div className="Search-Bar">
-          <div className="SearchBar">
-            <IoSearchSharp className="IoSearchSharp" />
-            <input type="text" placeholder="Search" />
+        <div className="categoryCard">
+          {/* <div className="Search-Bar">
+            <div className="SearchBar">
+              <IoSearchSharp className="IoSearchSharp" />
+              <input type="text" placeholder="Search" />
+            </div>
+          </div> */}
+          {/* Category Selection */}
+          <div className="category-container">
+            <h2 className="category-heading">Select Category</h2>
+            <div className="category-card">
+              <select
+                name="category"
+                className="selectCate"
+                value={formData.category || ""}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select a category</option>
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>
+                    {cat.category}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
-        {/* Category Selection */}
-        <div className="category-container">
-          <h2 className="category-heading">Select Category</h2>
-          <div className="category-card">
-            <select
-              name="category"
-              className="selectCate"
-              value={formData.category || ""}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a category</option>
-              {categories.map((cat) => (
-                <option key={cat._id} value={cat._id}>
-                  {cat.category}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
 
-        {/* Subcategory Selection */}
-        <div className="category-container">
-          <h2 className="category-heading">Select Subcategory</h2>
-          <div className="category-card">
-            <select
-              name="subcategory"
-              className="selectCate"
-              value={formData.subcategory || ""}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a subcategory</option>
-              {subCategories.map((sub) => (
-                <option key={sub._id} value={sub._id}>
-                  {sub.subCategory}
-                </option>
-              ))}
-            </select>
+          {/* Subcategory Selection */}
+          <div className="category-container">
+            <h2 className="category-heading">Select Subcategory</h2>
+            <div className="category-card">
+              <select
+                name="subcategory"
+                className="selectCate"
+                value={formData.subcategory || ""}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select a subcategory</option>
+                {subCategories.map((sub) => (
+                  <option key={sub._id} value={sub._id}>
+                    {sub.subCategory}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
 
-        {/* Brand Input */}
-        <div className="category-container">
-          <h2 className="category-heading">Add Brand</h2>
-          <div className="category-card">
-            <input
-              type="text"
-              name="brand"
-              className="category-input"
-              placeholder="Enter brand name"
-              value={formData.brand || ""}
-              onChange={handleChange}
-              required
-            />
-            <button type="submit" className="category-add-btn">
+          {/* Brand Input */}
+          <div className="category-container">
+            <h2 className="category-heading">Brand Name</h2>
+            <div className="category-card">
+              <input
+                type="text"
+                name="brand"
+                className="category-input"
+                placeholder="Enter brand name"
+                value={formData.brand || ""}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+          <div className="category-add-btn">
+            <button type="submit" >
               Add
             </button>
           </div>

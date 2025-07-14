@@ -50,19 +50,24 @@ const Coupons = () => {
   return (
     <div className="layout">
       <form onSubmit={handleSubmit} className="category-form-design">
-        <h2 className="category-heading">Add Coupon</h2>
-        <div className="category-card">
-          <input
-            type="text"
-            className="category-input"
-            placeholder="Enter coupon code"
-            value={coupon}
-            onChange={(e) => setCoupon(e.target.value)}
-            required
-          />
-          <button type="submit" className="category-add-btn">
-            Add
-          </button>
+        <div className="categoryCard">
+          <h2 className="category-heading">Coupon Name</h2>
+          <div className="category-card">
+            <input
+              type="text"
+              className="category-input"
+              placeholder="Enter coupon code"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+              required
+            />
+
+          </div>
+          <div className="category-add-btn">
+            <button type="submit" >
+              Add
+            </button>
+          </div>
         </div>
       </form>
 

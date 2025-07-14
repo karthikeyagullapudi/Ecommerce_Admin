@@ -1,6 +1,7 @@
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiTick } from "react-icons/ti";
+import { IoSearchSharp } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
 
 const CategoryTable = ({ categories }) => {
@@ -43,55 +44,66 @@ const CategoryTable = ({ categories }) => {
 
   return (
     <>
-      <table style={{ width: "100%" }}>
-        <thead>
-          <tr className="tableHead">
-            <th className="sNo">S.No</th>
-            <th className="Category">Category</th>
-            <th className="Action">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categoryList.length > 0 ? (
-            categoryList.map((item, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-
-                <td>
-                  {editIndex === index ? (
-                    <input
-                      type="text"
-                      value={editedCategoryName}
-                      onChange={(e) => setEditedCategoryName(e.target.value)}
-                    />
-                  ) : (
-                    item.category
-                  )}
-                </td>
-
-                <td>
-                  {editIndex === index ? (
-                    < TiTick className="TiTick" onClick={() => handleSave(item._id)} />
-                  ) : (
-                    <CiEdit
-                      className="CiEdit"
-                      onClick={() => handleEdit(index, item.category)}
-                    />
-                  )}
-                  <RiDeleteBin6Line
-                    className="RiDeleteBin6Line"
-                    onClick={() => handleDelete(item._id)}
-                  />
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="3">No categories found</td>
+      <div className="addCategoryCard">
+        <div className="addcategory">
+          <h2 className="category-heading">Add Category</h2>
+          <div className="Search-Bar">
+            <div className="SearchBar">
+              <IoSearchSharp className="IoSearchSharp" />
+              <input type="text" placeholder="Search" />
+            </div>
+          </div>
+        </div>
+        <table style={{ width: "100%" }}>
+          <thead>
+            <tr className="tableHead">
+              <th className="sNo">S.No</th>
+              <th className="Category">Category</th>
+              <th className="Action">Action</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {categoryList.length > 0 ? (
+              categoryList.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+
+                  <td>
+                    {editIndex === index ? (
+                      <input
+                        type="text"
+                        value={editedCategoryName}
+                        onChange={(e) => setEditedCategoryName(e.target.value)}
+                      />
+                    ) : (
+                      item.category
+                    )}
+                  </td>
+
+                  <td>
+                    {editIndex === index ? (
+                      < TiTick className="TiTick" onClick={() => handleSave(item._id)} />
+                    ) : (
+                      <CiEdit
+                        className="CiEdit"
+                        onClick={() => handleEdit(index, item.category)}
+                      />
+                    )}
+                    <RiDeleteBin6Line
+                      className="RiDeleteBin6Line"
+                      onClick={() => handleDelete(item._id)}
+                    />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3">No categories found</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };
