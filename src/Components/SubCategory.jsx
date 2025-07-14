@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SubCategoryTable from "../Components/SubCategoryTable.jsx";
 import BackEndApi from "./utils/httpclint.js";
+import { IoSearchSharp } from "react-icons/io5";
 
 const SubCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -77,44 +78,51 @@ const SubCategory = () => {
   return (
     <div className="layout">
       <form className="category-form-design" onSubmit={handleSubmit}>
-        <div className="category-container">
-          <h2 className="category-heading">Select Category</h2>
-          <div className="category-card">
-            <select
-              className="selectCate"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              required
-            >
-              <option value="">Select a category</option>
-              {categories.map((cat) => (
-                <option key={cat._id} value={cat._id}>
-                  {cat.category}
-                </option>
-              ))}
-            </select>
+        <div className="categoryCard">
+          <div className="category-container">
+            <h2 className="category-heading">Select Category</h2>
+            <div className="category-card">
+              <select
+                className="selectCate"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                required
+              >
+                <option value="">Select a category</option>
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>
+                    {cat.category}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div className="category-container">
-          <h2 className="category-heading">Add Subcategory</h2>
-          <div className="category-card">
-            <input
-              type="text"
-              className="category-input"
-              placeholder="Enter subcategory name"
-              value={subCategoryName}
-              onChange={(e) => setSubCategoryName(e.target.value)}
-              required
-            />
-            <button type="submit" className="category-add-btn">
+          <div className="category-container">
+            <h2 className="category-heading">Subcategory Name</h2>
+            <div className="category-card">
+              <input
+                type="text"
+                className="category-input"
+                placeholder="Enter subcategory name"
+                value={subCategoryName}
+                onChange={(e) => setSubCategoryName(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          <div className="category-add-btn">
+            <button type="submit" >
               Add
             </button>
           </div>
         </div>
       </form>
 
-      <SubCategoryTable rows={subCategories} />
+      <SubCategoryTable
+        categories={categories}
+        subCategories={subCategories}
+      />
     </div>
   );
 };
