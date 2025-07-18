@@ -430,13 +430,13 @@ td {
   background-color: white;
   padding: 20px 30px;
   border-radius: 5px;
-  width: 103%;
-  overflow: scroll;
+  width: 100%;
+  /* overflow: scroll; */
   /* Hide scrollbar for Firefox */
-  scrollbar-width: none;
+  /* scrollbar-width: none; */
 
   /* Hide scrollbar for IE/Edge */
-  -ms-overflow-style: none;
+  /* -ms-overflow-style: none; */
 }
 .category-add-btn {
   margin-top: 10px;
@@ -733,4 +733,12 @@ td {
 }
 .selectform {
   width: 345px;
+}
+
+th,
+td {
+  white-space: nowrap; /* ✅ Prevents text from breaking into multiple lines */
+  padding: 8px 12px;
+  text-align: center;
+  vertical-align: middle;
 }

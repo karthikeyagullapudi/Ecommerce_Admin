@@ -65,65 +65,67 @@ const AProductTable = () => {
           </div>
         </div>
 
-        <table>
-          <thead>
-            <tr className="tableHead">
-              <th className="sNo">S.No</th>
-              <th className="Category">Category</th>
-              <th className="Category">SubCategory</th>
-              <th className="Category">Brand</th>
-              <th className="Category">Product Name</th>
-              <th className="Category">Description</th>
-              <th className="Category">Price</th>
-              <th className="Category">Discount (%)</th>
-              <th className="Category">Discount Price</th>
-              <th className="Category">Warranty</th>
-              <th className="Category">Coupon</th>
-              <th className="Category">Color</th>
-              <th className="Category">Specifications</th>
-              <th className="Category">Image</th>
-              <th className="Action">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {addProduct.length > 0 ? (
-              addProduct.map((row, index) => (
-                <tr key={row._id || index} className="tabledata">
-                  <td>{index + 1}</td>
-                  <td>{getCategoryName(row.category)}</td>
-                  <td>{getSubCategoryName(row.subCategory)}</td>
-                  <td>{row.brand}</td>
-                  <td>{row.productName}</td>
-                  <td>{row.description}</td>
-                  <td>{row.price}</td>
-                  <td>{row.discount}</td>
-                  <td>{row.discountPrice}</td>
-                  <td>{row.warranty}</td>
-                  <td>{row.coupon}</td>
-                  <td>{row.colors}</td>
-                  <td>{row.specifications}</td>
-                  <td>
-                    {row.images && row.images.length > 0 ? (
-                      <img src={row.images[0]} alt="Product" width={50} />
-                    ) : (
-                      "No Image"
-                    )}
-                  </td>
-                  <td>
-                    <CiEdit className="CiEdit" />
-                    <RiDeleteBin6Line className="RiDeleteBin6Line" />
+        <div style={{ overflowX: "auto" }}>
+          <table>
+            <thead>
+              <tr className="tableHead">
+                <th className="sNo">S.No</th>
+                <th className="Category">Category</th>
+                <th className="Category">SubCategory</th>
+                <th className="Category">Brand</th>
+                <th className="Category">Product Name</th>
+                <th className="Category">Description</th>
+                <th className="Category">Price</th>
+                <th className="Category">Discount (%)</th>
+                <th className="Category">Discount Price</th>
+                <th className="Category">Warranty</th>
+                <th className="Category">Coupon</th>
+                <th className="Category">Color</th>
+                <th className="Category">Specifications</th>
+                <th className="Category">Image</th>
+                <th className="Action">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {addProduct.length > 0 ? (
+                addProduct.map((row, index) => (
+                  <tr key={row._id || index} className="tabledata">
+                    <td>{index + 1}</td>
+                    <td>{getCategoryName(row.category)}</td>
+                    <td>{getSubCategoryName(row.subCategory)}</td>
+                    <td>{row.brand}</td>
+                    <td>{row.productName}</td>
+                    <td>{row.description}</td>
+                    <td>{row.price}</td>
+                    <td>{row.discount}</td>
+                    <td>{row.discountPrice}</td>
+                    <td>{row.warranty}</td>
+                    <td>{row.coupon}</td>
+                    <td>{row.colors}</td>
+                    <td>{row.specifications}</td>
+                    <td>
+                      {row.images && row.images.length > 0 ? (
+                        <img src={row.images[0]} alt="Product" width={50} />
+                      ) : (
+                        "No Image"
+                      )}
+                    </td>
+                    <td>
+                      <CiEdit className="CiEdit" />
+                      <RiDeleteBin6Line className="RiDeleteBin6Line" />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="16" style={{ textAlign: "center" }}>
+                    s No products available
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="16" style={{ textAlign: "center" }}>
-                  No products available
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

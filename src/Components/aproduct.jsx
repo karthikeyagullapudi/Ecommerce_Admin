@@ -104,7 +104,6 @@ const AddProductStatic = () => {
 
   const handleBinaryImage = async (event) => {
     const file = event.target.files[0];
-    const fieldName = event.target.name;
 
     if (file) {
       setImagePreview(URL.createObjectURL(file));
@@ -120,8 +119,10 @@ const AddProductStatic = () => {
         });
 
         if (response?.status === 201) {
-          const imageUrl = response?.data?.path;
-          setData((prev) => ({ ...prev, [fieldName]: imageUrl }));
+          setData({
+            ...data,
+            [event.target.name]: response?.data?.data?.filename,
+          });
         }
       } catch (error) {
         console.log("Image upload error:", error);
@@ -184,7 +185,12 @@ const AddProductStatic = () => {
   return (
     <div className="layout1">
       <div className="add-product-container">
-        <form className="add-product-form" onSubmit={handleSubmit}>
+        <form
+          className="add-product-form"
+          onSubmit={handleSubmit}
+          method="post"
+          encType="multipart/form-data"
+        >
           <h2>Add New Product</h2>
           <div className="cate_Subcate">
             <div className="row">
@@ -332,7 +338,6 @@ const AddProductStatic = () => {
           <label>Description</label>
           <textarea name="description" required onChange={handleChange} />
 
-
           <label>Specifications</label>
           <textarea name="specifications" required onChange={handleChange} />
 
@@ -354,13 +359,11 @@ const AddProductStatic = () => {
           />
 
           <div className="category-add-btn">
-            <button type="submit" >
-              Add Product
-            </button>
+            <button type="submit">Add Product</button>
           </div>
         </form>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 };
 
